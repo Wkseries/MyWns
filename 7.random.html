@@ -5,402 +5,448 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Drama Reviews</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    body {
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+      background: linear-gradient(135deg, #121212, #1c1c1c, #2f2f2f, #121212);
+      background-size: 300% 300%;
+      color: #fff;
+      padding: 40px 50px;
+      overflow-x: hidden;
+      opacity: 0;
+      animation: gradientAnimation 6s ease-in-out infinite, fadeInBody 1.5s forwards;
+    }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px;
-  background: linear-gradient(135deg, #121212, #1c1c1c, #2f2f2f, #121212);
-  background-size: 300% 300%;
-  color: #fff;
-  padding: 40px 50px;
-  overflow-x: hidden;
-  opacity: 0;
-  animation: gradientAnimation 6s ease-in-out infinite, fadeInBody 1.5s forwards;
-}
+    /* Animation for background gradient */
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      25% {
+        background-position: 50% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      75% {
+        background-position: 50% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
 
-/* Animation for background gradient */
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+    /* Existing fade-in animation for body */
+    @keyframes fadeInBody {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
 
-/* Existing fade-in animation for body */
-@keyframes fadeInBody {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+    /* Global styles for titles */
+    h1, h2 {
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: fadeInTitle 1s forwards;
+    }
 
-/* Global styles for titles */
-h1, h2 {
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-  margin-bottom: 30px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  opacity: 0;
-  animation: fadeInTitle 1s forwards;
-}
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 40px;
+      position: relative;
+      animation-delay: 0.5s;
+    }
 
-h1 {
-  font-size: 3.5rem;
-  margin-bottom: 40px;
-  position: relative;
-  animation-delay: 0.5s;
-}
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: #ff4b4b;
+      border-radius: 2px;
+    }
 
-h1::after {
-  content: '';
+    h2 {
+      font-size: 2.4rem;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      position: relative;
+      animation-delay: 0.7s;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background-color: #ff4b4b;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    h2:hover::after {
+      width: 100%;
+      background-color: #ffcb42;
+    }
+
+    @keyframes fadeInTitle {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section styling */
+    .section {
+      padding: 50px 40px;
+      background-color: rgba(0, 0, 0, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+      margin-bottom: 60px;
+      opacity: 0;
+      animation: fadeInSection 1.5s forwards;
+    }
+
+    @keyframes fadeInSection {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .image-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      justify-items: center;
+      margin-top: 40px;
+    }
+
+    .image-box {
+      position: relative;
+      width: 100%;
+      max-width: 180px;
+      height: 270px; /* Fixed height */
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+      background-color: #1d1d1d;
+    }
+
+    .image-box:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.5);
+      opacity: 0.9;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+      filter: brightness(60%);
+    }
+
+    .image-box:hover img {
+      filter: brightness(110%);
+    }
+
+    .title-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: #ffcb42;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 0 0 20px 20px;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .image-box:hover .title-overlay {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .title-overlay:hover {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.85);
+      transform: translateY(-5px);
+    }
+
+    /* Scroll-to-Top Button */
+    #scrollToTopBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: #ff4b4b;
+      color: #fff;
+      font-size: 24px;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+      z-index: 1000;
+      animation: bounce 1.2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    #scrollToTopBtn:hover {
+      background-color: #ffcb42;
+      transform: scale(1.1);
+    }
+
+    #scrollToTopBtn.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 15px 30px;
+      border-radius: 8px;
+    }
+
+    .navbar .back-button {
+      background-color: #ff4b4b;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+    }
+
+    .navbar .back-button:hover {
+      background-color: #ffcb42;
+      transform: scale(1.05);
+    }
+
+    /* Styling for the nav links container */
+    .navbar .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* Styling for each nav link */
+    .navbar .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+
+    /* Hover effect for nav links */
+    .navbar .nav-links a:hover {
+      color: #ffcb42;
+      transform: translateY(-2px);
+    }
+
+    /* Add smooth scrolling to the page */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Add click animation effect to nav links */
+    .navbar .nav-links a.clicked {
+      animation: clickAnimation 0.3s ease;
+      color: #ff4b4b;
+    }
+
+    /* Keyframes for the click animation */
+    @keyframes clickAnimation {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #ebebeb;
+      padding: 5px;
+      width: 100%;
+      margin-top: 5px;
+      text-decoration: none;
+    }
+
+    .copyright a {
+      color: #ffd700;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .copyright a:hover {
+      color: #ff4b4b;
+    }
+
+    /* Smooth transition for scrolling */
+    .scroll-to-target {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    h1 {
+      margin-top: 50px;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      h2::after {
+        width: 75%;
+        background-color: #ff4b4b;
+      }
+
+      .section {
+        padding: 30px 20px;
+      }
+
+      .image-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .image-box {
+        height: 180px; /* Smaller height for mobile */
+      }
+
+      .navbar {
+        padding: 5px 5px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .navbar .back-button {
+        padding: 8px 15px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      div.nav-links {
+        display: none !important;
+      }
+    }
+
+    .star-text {
   position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background-color: #ff4b4b;
-  border-radius: 2px;
-}
-
-h2 {
-  font-size: 2.4rem;
-  margin-bottom: 30px;
-  padding-bottom: 10px;
-  position: relative;
-  animation-delay: 0.7s;
-}
-
-h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50%;
-  height: 3px;
-  background-color: #ff4b4b;
-  transition: width 0.3s ease, background-color 0.3s ease;
-}
-
-h2:hover::after {
-  width: 100%; /* Underline gets longer on hover */
-  background-color: #ffcb42;
-}
-
-@keyframes fadeInTitle {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Section styling */
-.section {
-  padding: 50px 40px;
-  background-color: rgba(0, 0, 0, 0.85);
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
-  margin-bottom: 60px;
-  opacity: 0;
-  animation: fadeInSection 1.5s forwards;
-}
-
-@keyframes fadeInSection {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.image-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  justify-items: center;
-  margin-top: 40px;
-}
-
-.image-box {
-  position: relative;
-  width: 100%;
-  max-width: 180px;
-  border-radius: 20px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
-  background-color: #1d1d1d;
-}
-
-.image-box:hover {
-  transform: scale(1.08);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.5);
-  opacity: 0.9;
-}
-
-.image-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease; /* Add filter transition */
-  filter: brightness(60%); /* Lower brightness by default */
-}
-
-.image-box:hover img {
-  filter: brightness(110%); /* Increase brightness on hover */
-}
-
-.title-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
   background: rgba(0, 0, 0, 0.7);
   color: #ffcb42;
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 18px;
+  padding: 4px 8px;
+  border-radius: 15px;
+  font-size: 14px;
   font-weight: bold;
-  border-radius: 0 0 20px 20px;
-  transform: translateY(100%);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.image-box:hover .title-overlay {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.title-overlay:hover {
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.85);
-  transform: translateY(-5px);
-}
-
-/* Scroll-to-Top Button */
-#scrollToTopBtn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background-color: #ff4b4b;
-  color: #fff;
-  font-size: 24px;
-  text-align: center;
-  line-height: 50px;
-  border-radius: 50%;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-  z-index: 1000;
-  animation: bounce 1.2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px); /* A more subtle bounce */
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-#scrollToTopBtn:hover {
-  background-color: #ffcb42;
-  transform: scale(1.1);
-}
-
-#scrollToTopBtn.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  padding: 15px 30px;
-  border-radius: 8px;
-}
-
-.navbar .back-button {
-  background-color: #ff4b4b;
-  color: white;
   font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  text-decoration: none;
-}
-
-.navbar .back-button:hover {
-  background-color: #ffcb42;
-  transform: scale(1.05);
-}
-
-/* Styling for the nav links container */
-.navbar .nav-links {
   display: flex;
-  gap: 20px;
-}
-
-/* Styling for each nav link */
-.navbar .nav-links a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
-  transition: color 0.3s ease, transform 0.3s ease;
-  position: relative;
-}
-
-/* Hover effect for nav links */
-.navbar .nav-links a:hover {
-  color: #ffcb42;
-  transform: translateY(-2px); /* Slight lift effect on hover */
-}
-
-/* Add smooth scrolling to the page */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Add click animation effect to nav links */
-.navbar .nav-links a.clicked {
-  animation: clickAnimation 0.3s ease;
-  color: #ff4b4b; /* Change color when clicked */
-}
-
-/* Keyframes for the click animation */
-@keyframes clickAnimation {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2); /* Slightly grow the link */
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.copyright {
-  text-align: center;
-  font-size: 1.1rem;
-  color: #ebebeb;
-  padding: 5px;
-  width: 100%;
-  margin-top: 5px;
-  text-decoration: none;
-}
-
-.copyright a {
-  color: #ffd700;
-  font-weight: bold;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.copyright a:hover {
-  color: #ff4b4b;
-}
-
-/* Smooth transition for scrolling */
-.scroll-to-target {
+  align-items: center;
+  gap: 3px;
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 203, 66, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  
+  /* Initially hidden */
   opacity: 0;
-  pointer-events: none;
+  transform: translateY(-10px);
 }
 
-h1 {
-  margin-top: 50px;
+.image-box:hover .star-text {
+  /* Visible on hover */
+  opacity: 1;
+  transform: translateY(0);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(255, 203, 66, 0.4);
 }
 
+/* Mobile adjustments */
 @media (max-width: 480px) {
-  body {
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 1.8rem; /* Smaller font size for h1 */
-  }
-
-  h2 {
-    font-size: 1.4rem; /* Smaller font size for h2 */
-  }
-
-  /* Making the underline under h2 longer */
-  h2::after {
-    width: 75%; /* Increased width of the underline */
-    background-color: #ff4b4b;
-  }
-
-  .section {
-    padding: 30px 20px;
-  }
-
-  .image-container {
-    grid-template-columns: repeat(3, 1fr); /* 3 images per row on mobile */
-    gap: 10px;
-  }
-
-  .navbar {
-    padding: 5px 5px;
-    flex-direction: column; /* Stack navbar items vertically */
-    align-items: flex-start; /* Align navbar items to the left */
-  }
-  .navbar .back-button {
-    padding: 8px 15px;
+  .star-text {
+    font-size: 12px;
+    padding: 3px 6px;
+    top: 8px;
+    left: 8px;
+    border-radius: 12px;
   }
 }
-
-@media screen and (max-width: 480px) {
-  div.nav-links {
-    display: none !important; /* Force hiding even if other rules exist */
-  }
-}
-
-
 
   </style>
 </head>
@@ -416,44 +462,73 @@ h1 {
     </div>
   </div>
   
-  
-  <h1>Random Non Korean Series:</h1>
+  <h1>Random Series:</h1>
 
   <div id="jap" class="section">
-    <h2>⭐ Japenese</h2>
+    <h2>⭐ Anime</h2>
     <div class="image-container">
-        <img class="image-box" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLSiQlO9fLddX0Nk0FJ9Nd4-piBYOr2bwsbg&s" alt="Spy x family" loading="lazy">
+      <div class="image-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLSiQlO9fLddX0Nk0FJ9Nd4-piBYOr2bwsbg&s" alt="Spy x family" loading="lazy">
         <div class="title-overlay">Spy x Family</div>
-        <img class="image-box" src="https://upload.wikimedia.org/wikipedia/en/a/ad/Spy_%C3%97_Family_Code_White_movie_poster.png" alt="Spy x family movie" loading="lazy">
-        <div class="title-overlay">Spy × Family Code: White</div>
-
+        <div class="star-text">10⭐</div>
+      </div>
+      <div class="image-box">
+        <img src="https://m.media-amazon.com/images/M/MV5BZTI4ZGMxN2UtODlkYS00MTBjLWE1YzctYzc3NDViMGI0ZmJmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Frieren: Beyond Journey's End" loading="lazy">
+        <div class="title-overlay">Frieren: Beyond Journey's End</div>
+        <div class="star-text">10⭐</div>
+      </div>
+      <div class="image-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjjydKUpH1rz3V2N2oTcKX7O3QIMkH_-xqqw&s" alt="Solo Leveling" loading="lazy">
+        <div class="title-overlay">Solo Leveling</div>
+        <div class="star-text">10⭐</div>
+      </div>
+      <div class="image-box">
+        <img src="https://m.media-amazon.com/images/M/MV5BNDZjNTgyNDktZTJmZi00YzQ3LWJjNGMtOWQ0ODE1OGMwNmMzXkEyXkFqcGc@._V1_.jpg" alt="The Reincarnation of the Strongest Exorcist in Another World" loading="lazy">
+        <div class="title-overlay">The Reincarnation of the Strongest Exorcist in Another World</div>
+        <div class="star-text">10⭐</div>
+      </div>
+      <div class="image-box">
+        <img src="https://m.media-amazon.com/images/M/MV5BY2MzZGVhZTgtNWZlYi00NGI5LTk5N2QtYTkzMzNkMWM0NjBhXkEyXkFqcGc@._V1_.jpg" alt="The Misfit of Demon King Academy" loading="lazy">
+        <div class="title-overlay">The Misfit of Demon King Academy</div>
+        <div class="star-text">9⭐</div>
+      </div>
+      <div class="image-box">
+        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-GXnJH33t-Oulvgw2hTqRdzOv0OZh9FZu-tB6G-iPeih6bV_gaIy56MIiqCaRDmoaKWwVyw" alt="Re: Zero - Starting Life in Another World" loading="lazy">
+        <div class="title-overlay">Re: Zero - Starting Life in Another World</div>
+        <div class="star-text">8⭐</div>
+      </div>
+      <div class="image-box">
+        <img src="https://m.media-amazon.com/images/M/MV5BZTE0ZmQ0ZmYtYjllZS00MDg0LTk3YzMtYzBhMDk4ZjUzNzAyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="The Greatest Demon Lord Is Reborn as a Typical Nobody" loading="lazy">
+        <div class="title-overlay">The Greatest Demon Lord Is Reborn as a Typical Nobody</div>
+        <div class="star-text">9⭐</div>
+      </div>
+      <div class="image-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9rtG5dt8r74mgJQobeNflvD8faWZmgxRh8A&s" alt="Mushoku Tensei Jobless Reincarnation" loading="lazy">
+        <div class="title-overlay">Mushoku Tensei Jobless Reincarnation</div>
+        <div class="star-text">10⭐</div>
+      </div>
     </div>
   </div>
-
 
   <div id="ame" class="section">
     <h2>⭐ American</h2>
     <div class="image-container">
-        <img class="image-box" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAVriuGbniv9qyQuBX87waAUaA8LjiXlm3RA&s" alt="The Glory" loading="lazy">
+      <div class="image-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAVriuGbniv9qyQuBX87waAUaA8LjiXlm3RA&s" alt="Ginny & Georgia" loading="lazy">
         <div class="title-overlay">Ginny & Georgia</div>
-        <img class="image-box" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-rrlxEA2K69Bj3-TYdjG1C5FgjaGMr_8TTw&s" alt="Tomorrow" loading="lazy">
+        <div class="star-text">10⭐</div>
+      </div>
+      <div class="image-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-rrlxEA2K69Bj3-TYdjG1C5FgjaGMr_8TTw&s" alt="Fate: The Winx Saga" loading="lazy">
         <div class="title-overlay">Fate: The Winx Saga</div>
-        <img class="image-box" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPWNDa6LDnTq0bXDFYRa0CgQ9JnWFR-baUlg&s" alt="Branding In Seongsu" loading="lazy">
+        <div class="star-text">8⭐</div>
+      </div>
+      <div class="image-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPWNDa6LDnTq0bXDFYRa0CgQ9JnWFR-baUlg&s" alt="Avatar: The Legend of Korra" loading="lazy">
         <div class="title-overlay">Avatar: The Legend of Korra</div>
+        <div class="star-text">10⭐</div>
+      </div>
     </div>
-  </div>
-
-
-  
-  <div id="18" class="section">
-    <h2>⭐ Korean Rate 18+</h2>
-    <div class="image-container">
-        <img class="image-box" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC2GAETK8TuV2vVjqT5A_Pb1gR5qRtcWAW0Q&s" alt="The Glory" loading="lazy">
-        <div class="title-overlay">Squid Game</div>
-    </div>
-  </div>
-
-
   </div>
 
   <div class="copyright" id="copyright">
@@ -463,71 +538,48 @@ h1 {
 
   <div id="scrollToTopBtn">&#8679;</div>
 
-<script>
-  const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+  <script>
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
 
-  // Show the button when the user scrolls down 100px
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-      scrollToTopBtn.classList.add('visible');
-    } else {
-      scrollToTopBtn.classList.remove('visible');
-    }
-  });
-
-  // Smooth scroll to the top when the button is clicked
-  scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  });
-</script>
-
-<script>
-  // JavaScript to handle the filter functionality
-  function filterStars(starRating) {
-    // Hide all sections first
-    const allSections = document.querySelectorAll('.section');
-    allSections.forEach(section => {
-      section.style.display = 'none';
+    // Show the button when the user scrolls down 100px
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
     });
 
-    // Show the selected star rating section
-    const selectedSection = document.getElementById('stars-' + starRating);
-    if (selectedSection) {
-      selectedSection.style.display = 'block';
-    }
-  }
-</script>
-
-<script>
-// Add click animation to nav links and smooth scrolling
-document.querySelectorAll('.navbar .nav-links a').forEach(link => {
-  link.addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent default link behavior
-    
-    // Add animation class to clicked link
-    this.classList.add('clicked');
-    
-    // Remove 'clicked' class from all links after animation completes
-    setTimeout(() => {
-      this.classList.remove('clicked');
-    }, 300);
-    
-    // Smooth scroll to the section the link points to
-    const targetId = this.getAttribute('href').substring(1); // Get target section id
-    const targetElement = document.getElementById(targetId);
-    
-    if (targetElement) {
-      targetElement.scrollIntoView({
+    // Smooth scroll to the top when the button is clicked
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
         behavior: 'smooth',
-        block: 'start'
       });
-    }
-  });
-});
-</script>
+    });
 
+    // Add click animation to nav links and smooth scrolling
+    document.querySelectorAll('.navbar .nav-links a').forEach(link => {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        this.classList.add('clicked');
+        
+        setTimeout(() => {
+          this.classList.remove('clicked');
+        }, 300);
+        
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
