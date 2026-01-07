@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <title>Review</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="AnimeList.js" defer></script>
+
+    <script src="topJ.js" defer></script>
+    <script src="bestJ.js" defer></script>
+    <script src="latestJ.js" defer></script>
+    <script src="tvj.js" defer></script>
+
+    <link rel="stylesheet" href="topC.css">
+    <link rel="stylesheet" href="bestC.css">
+    <link rel="stylesheet" href="latestC.css">
+    <link rel="stylesheet" href="tvc.css">
+
+
+</head>
+<body>
+
+    <div class="top-bg-rays"></div>
+
+    <div class="top-layout-wrapper">
+        <header class="top-section-header top-reveal">
+            <div class="top-premium-header-container">
+                <h2 class="top-premium-title">
+                    <span class="top-shimmer-text">Anime Featured</span>
+                </h2>
+            </div>
+        </header>
+
+        <div class="top-premium-header-left">
+            <span class="top-eyebrow-small">Top Rated Selection</span>
+            <h1 class="top-main-title-left">BEST OF THE BEST</h1>
+            <div class="top-header-line-left"></div>
+        </div>
+
+        <div id="top-animeContainer" class="top-main-grid"></div>
+    </div>
+
+    <div id="top-detailsModal" class="top-modal-overlay fixed inset-0 z-50 p-6 items-center justify-center" onclick="topCloseModal()">
+        <div class="top-modal-fixed-size relative" onclick="event.stopPropagation()">
+            <div class="top-modal-accent" id="top-modalAccent"></div>
+            <div class="top-glass-panel rounded-[3rem] border-white/10 overflow-hidden h-full">
+                <button onclick="topCloseModal()" class="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors z-30 bg-black/40 backdrop-blur-md rounded-full p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <div id="top-modalContent" class="h-full flex flex-row"></div>
+            </div>
+        </div>
+    </div>
+
+
+     <div class="bg-rays"></div>
+
+    <div class="layout-wrapper">
+        <header class="premium-header">
+            <div class="title-wrap">
+                <span class="eyebrow">Top Tier Selection</span>
+                <h1 class="main-title">BEST RATED</h1>
+            </div>
+            <div class="header-accent"></div>
+        </header>
+
+        <div id="bestContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl"></div>
+    </div>
+
+    <div id="detailsModal" class="fixed inset-0 z-50 p-6 items-center justify-center" onclick="closeModal()">
+        <div class="modal-fixed-size relative" onclick="event.stopPropagation()">
+            <div class="modal-accent" id="modalAccent"></div>
+            <div class="glass-panel rounded-[3rem] border-white/10 overflow-hidden h-full flex" id="modalContent"></div>
+            
+            <button onclick="closeModal()" class="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors z-[60] bg-black/40 backdrop-blur-md rounded-full p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="last-layout-wrapper">
+        <header class="last-premium-header">
+            <span class="last-eyebrow">Fresh Picks</span>
+            <h1 class="last-main-title">LATEST ADDED</h1>
+            <div class="last-header-accent"></div>
+        </header>
+
+        <div id="last-latestContainer"></div>
+    </div>
+
+    <div id="last-detailsModal" class="fixed inset-0 z-50 p-6 items-center justify-center" onclick="lastCloseModal()">
+        <div class="last-modal-fixed-size relative" onclick="event.stopPropagation()">
+            <div class="last-modal-accent" id="last-modalAccent"></div>
+            <div class="last-glass-panel rounded-[3rem] border border-white/10 overflow-hidden h-full flex" id="last-modalContent"></div>
+            
+            <button onclick="lastCloseModal()" class="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors z-[60] bg-black/40 backdrop-blur-md rounded-full p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="zen-slider-wrap" id="zen-trigger">
+        <div class="zen-vignette"></div>
+        <img id="zen-poster-view" src="" alt="Poster" draggable="false">
+        
+        <div class="zen-badge">
+            <span class="zen-dot"></span>
+            FEATURED LIVE ON TV
+        </div>
+    </div>
+  
+</body>
+</html>

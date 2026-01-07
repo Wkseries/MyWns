@@ -1,0 +1,83 @@
+/* --- BASE STYLES --- */
+body { background-color: #000000; }
+body.modal-open { overflow: hidden; }
+
+.layout-wrapper { 
+    min-height: 100vh; display: flex; flex-direction: column; 
+    padding: 2rem 1%; width: 98%; margin: 0 auto; 
+}
+
+/* --- PREMIUM HEADER --- */
+.premium-header {
+    margin-top: -30px; margin-bottom: 2.5rem; position: relative;
+    display: flex; flex-direction: column; align-items: flex-start;
+}
+.eyebrow {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6em;
+    color: #f97316; font-weight: 800; margin-bottom: 0.4rem;
+}
+.main-title {
+    font-size: 3.8rem; font-weight: 900; letter-spacing: -0.04em; line-height: 0.85;
+    background: linear-gradient(to right, #fff 20%, #f97316 50%, #fff 80%);
+    background-size: 200% auto; -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; animation: shine 6s linear infinite;
+}
+
+/* --- CARD HOVER BORDER SYSTEM --- */
+.best-card-wrapper {
+    position: relative;
+    padding: 2px;
+    border-radius: 0.8rem; /* Sharper Radius */
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.best-card-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.8rem;
+    padding: 2px;
+    background: transparent;
+    transition: all 0.4s ease;
+    z-index: 0;
+}
+
+.best-card-wrapper:hover .best-card-border {
+    background: linear-gradient(135deg, #f97316, #ea580c, #fb923c);
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+}
+
+.best-card {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 2/3;
+    background: #080808;
+    border-radius: 0.7rem;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.best-card-wrapper:hover .best-card {
+    transform: translateY(-2px);
+    border-color: transparent;
+}
+
+.card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;
+}
+
+/* --- MODAL --- */
+#detailsModal { display: none; backdrop-filter: blur(25px); background: rgba(0,0,0,0.8); }
+#detailsModal.active { display: flex; }
+.modal-fixed-size { width: 1250px; height: 750px; max-width: 95vw; max-height: 90vh; position: relative; }
+.modal-accent { 
+    position: absolute; inset: -1.5px; z-index: -1; border-radius: 2rem; filter: blur(6px);
+    background: linear-gradient(90deg, #ea580c, #fb923c, #f97316, #ea580c); 
+    background-size: 300% 100%; animation: shine 5s linear infinite; 
+}
+.glass-panel { background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(5, 5, 5, 1) 100%); }
+
+@keyframes shine { to { background-position: 200% center; } }

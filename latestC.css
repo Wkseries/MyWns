@@ -1,0 +1,89 @@
+/* --- BASE STYLES --- */
+body { background-color: #000000; }
+body.modal-open { overflow: hidden; }
+
+.last-layout-wrapper { 
+    min-height: 100vh; display: flex; flex-direction: column; 
+    padding: 2rem 1% 1rem 1%; width: 98%; margin: 0 auto; 
+}
+
+/* --- PREMIUM HEADER --- */
+.last-premium-header {
+    margin-bottom: 2.5rem; position: relative;
+    display: flex; flex-direction: column; align-items: flex-start;
+}
+
+.last-eyebrow {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6em;
+    color: #f97316; font-weight: 800; margin-bottom: 0.4rem;
+}
+
+.last-main-title {
+    font-size: 3.8rem; font-weight: 900; letter-spacing: -0.04em; line-height: 0.85;
+    background: linear-gradient(to right, #fff 20%, #f97316 50%, #fff 80%);
+    background-size: 200% auto; -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; animation: last-shine 6s linear infinite;
+}
+
+.last-header-accent {
+    width: 500px; height: 2px;
+    background: linear-gradient(90deg, #f97316 0%, #f97316 40%, transparent 100%);
+    margin-top: 0.75rem;
+}
+
+/* --- CARD HOVER BORDER SYSTEM (SHARPER RADIUS) --- */
+.last-card-wrapper {
+    position: relative;
+    padding: 2px;
+    border-radius: 0.8rem; /* Sharper Radius */
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.last-card-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.8rem; /* Matches Wrapper */
+    padding: 2px;
+    background: transparent;
+    transition: all 0.4s ease;
+    z-index: 0;
+}
+
+.last-card-wrapper:hover .last-card-border {
+    background: linear-gradient(135deg, #f97316, #ea580c, #fb923c);
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+}
+
+.last-strip {
+    position: relative;
+    z-index: 1;
+    display: flex; height: 230px; background: #080808; 
+    border-radius: 0.7rem; /* Slightly smaller to fit inside wrapper */
+    overflow: hidden; border: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer; transition: all 0.4s ease;
+}
+
+.last-card-wrapper:hover .last-strip {
+    transform: translateY(-2px);
+    border-color: transparent;
+}
+
+/* --- IMAGE & INFO --- */
+.last-img { width: 40%; height: 100%; object-fit: cover; clip-path: polygon(0 0, 100% 0, 88% 100%, 0% 100%); }
+.last-info { width: 60%; padding: 1.5rem; display: flex; flex-direction: column; justify-content: center; }
+
+/* --- MODAL --- */
+#last-detailsModal { display: none; backdrop-filter: blur(25px); background: rgba(0,0,0,0.8); }
+#last-detailsModal.active { display: flex; }
+.last-modal-fixed-size { width: 1250px; height: 750px; max-width: 95vw; max-height: 90vh; position: relative; }
+.last-modal-accent { 
+    position: absolute; inset: -1.5px; z-index: -1; border-radius: 2rem; filter: blur(6px);
+    background: linear-gradient(90deg, #ea580c, #fb923c, #f97316, #ea580c); 
+    background-size: 300% 100%; animation: last-shine 5s linear infinite; 
+}
+.last-glass-panel { background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(5, 5, 5, 1) 100%); }
+.last-modal-scroll-area { overflow-y: auto; padding-right: 1rem; height: 100%; }
+.last-modal-scroll-area::-webkit-scrollbar { width: 3px; }
+.last-modal-scroll-area::-webkit-scrollbar-thumb { background: rgba(249, 115, 22, 0.4); border-radius: 10px; }
+
+@keyframes last-shine { to { background-position: 200% center; } }

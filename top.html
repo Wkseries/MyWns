@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Spotlight</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="topC.css">
+</head>
+<body class="top-body-root">
+    <div class="top-bg-rays"></div>
+
+    <div class="top-layout-wrapper">
+        <header class="top-section-header top-reveal">
+            <div class="top-premium-header-container">
+                <h2 class="top-premium-title">
+                    <span class="top-shimmer-text">Anime Featured</span>
+                </h2>
+            </div>
+        </header>
+
+        <div class="top-premium-header-left">
+            <span class="top-eyebrow-small">Top Rated Selection</span>
+            <h1 class="top-main-title-left">BEST OF THE BEST</h1>
+            <div class="top-header-line-left"></div>
+        </div>
+
+        <div id="top-animeContainer" class="top-main-grid"></div>
+    </div>
+
+    <div id="top-detailsModal" class="top-modal-overlay fixed inset-0 z-50 p-6 items-center justify-center" onclick="topCloseModal()">
+        <div class="top-modal-fixed-size relative" onclick="event.stopPropagation()">
+            <div class="top-modal-accent" id="top-modalAccent"></div>
+            <div class="top-glass-panel rounded-[3rem] border-white/10 overflow-hidden h-full">
+                <button onclick="topCloseModal()" class="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors z-30 bg-black/40 backdrop-blur-md rounded-full p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <div id="top-modalContent" class="h-full flex flex-row"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="AnimeList.js"></script>
+    <script src="topJ.js"></script>
+</body>
+</html>
