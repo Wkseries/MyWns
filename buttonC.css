@@ -1256,7 +1256,7 @@ body.modal-open {
         width: 95%;
         height: 90%;
         max-width: 95vw;
-        max-height: 90vh;
+        max-height: 75vh;
     }
     .anibutton-btn-close {
         top: 1.5rem;
