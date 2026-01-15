@@ -772,7 +772,7 @@ const animes = [
   { 
     name: "Hero Without a Class: Who Even Needs Skills?!", 
     file: "HeroWithoutClass.html", 
-    poster: "https://m.media-amazon.com/images/M/MV5BYTM3ZTk4YmMtOTQ4Yy00OTk2LWIyYmEtYzRmYjUwOWEzMmQzXkEyXkFqcGc@._V1_.jpg", 
+    poster: "https://animemojo.com/images/articles/banners/hero-without-a-class-who-even-needs-skills-anime-will-premiere-in-2025-ab19102.jpg", 
     alt: "Hero Without a Class: Who Even Needs Skills?! Poster",
     genre: "Action • Adventure • Fantasy", 
     episodes: "▶️ 12",
@@ -794,7 +794,7 @@ const animes = [
   { 
     name: "The Ossan Newbie Adventurer", 
     file: "OssanNewbie.html", 
-    poster: "https://static.wikia.nocookie.net/the-ossan-newbie-adventurer/images/6/68/The_Ossan_Newbie_Adventurer_Poster_1.jpg/revision/latest?cb=20240722202625", 
+    poster: "https://m.media-amazon.com/images/M/MV5BNWE0YjE3YWEtMmM2Mi00MzM0LWJiZDktZGRjM2FiNmU0MDAyXkEyXkFqcGc@._V1_.jpg", 
     alt: "The Ossan Newbie Adventurer Poster",
     genre: "Action • Comedy • Fantasy", 
     episodes: "▶️ 12",
