@@ -8,7 +8,7 @@
 }
 
 /* 1. Hide Arrows when modal is open */
-body.anislider-modal-open .anislider-arrow-btn {
+body[class*="modal-open"] .anislider-arrow-btn {
     display: none !important;
 }
 
@@ -270,7 +270,7 @@ body.anislider-modal-open .anislider-gallery-wrapper {
 /* --- ASLIDER MOBILE MEDIA QUERY (MATCHING LATEST) --- */
 @media (max-width: 480px) {
     /* Hide background elements and arrows when modal is open */
-    body.anislider-modal-open .anislider-arrow-btn {
+    body[class*="modal-open"] .anislider-arrow-btn {
         display: none !important;
     }
     body.anislider-modal-open .anislider-gallery-wrapper {
