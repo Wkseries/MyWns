@@ -1,0 +1,76 @@
+/* Body strictly as requested */
+.anitv-slider-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 100%; /* Limits width on large screens */
+    height: 240px;
+    background: #080808;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: grab;
+    user-select: none;
+    margin-top: -20px; /* Centers the slider horizontally */
+    margin-bottom: 20px; /* Centers the slider horizontally */
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Premium Hover: Subtle lift + Clean Orange Border */
+.anitv-slider-wrap:hover {
+    transform: translateY(-4px);
+    border-color: #f97316;
+    box-shadow: 0 10px 30px -10px rgba(249, 115, 22, 0.3);
+}
+
+.anitv-slider-wrap:active { cursor: grabbing; }
+
+#anitv-poster-view {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    transition: opacity 0.8s ease-in-out, transform 1.2s ease-out;
+    opacity: 0;
+}
+
+.anitv-vignette {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%, rgba(0,0,0,0.4) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.anitv-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 3;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #fff;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.anitv-dot {
+    width: 6px;
+    height: 6px;
+    background: #f97316;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #f97316;
+}
+
+
+@media (max-width: 1024px) { .anitv-slider-wrap { height: 210px; width: 100%; } }
+@media (max-width: 768px) { .anitv-slider-wrap { height: 170px; width: 100%;} }
+@media (max-width: 425px) { .zanitv-slider-wrap { height: 130px; width: 100%;} }
+@media (max-width: 320px) { .anitv-slider-wrap { height: 100px; width: 100%;} }

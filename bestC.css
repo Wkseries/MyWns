@@ -1,0 +1,258 @@
+/* --- BASE STYLES --- */
+body.anibest-modal-open { overflow: hidden; }
+
+.anibest-layout-wrapper { 
+    min-height: 100vh; display: flex; flex-direction: column; 
+    padding: 2rem 1%; width: 98%; margin: 0 auto; 
+}
+
+/* --- PREMIUM HEADER --- */
+.anibest-premium-header {
+    margin-top: -30px; margin-bottom: 2.5rem; position: relative;
+    display: flex; flex-direction: column; align-items: flex-start;
+}
+.anibest-eyebrow {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6em;
+    color: #f97316; font-weight: 800; margin-bottom: 0.4rem;
+}
+.anibest-main-title {
+    font-size: 3.8rem; font-weight: 900; letter-spacing: -0.04em; line-height: 0.85;
+    background: linear-gradient(to right, #fff 20%, #f97316 50%, #fff 80%);
+    background-size: 200% auto; -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; animation: shine 6s linear infinite;
+}
+
+.anibest-header-accent {
+    width: 500px; height: 2px;
+    background: linear-gradient(90deg, #f97316 0%, #f97316 40%, transparent 100%);
+    margin-top: 0.75rem;
+}
+
+/* --- CARD HOVER SYSTEM --- */
+.anibest-card-wrapper {
+    position: relative;
+    padding: 2px;
+}
+
+.anibest-card-border {
+    position: absolute; 
+    inset: 0; 
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.4s ease;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+.anibest-card {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 2/3;
+    background: #080808;
+    border-radius: 0.7rem;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.anibest-card-wrapper:hover .anibest-card {
+    border-color: #f97316;
+    box-shadow: inset 0 0 30px rgba(249, 115, 22, 0.1);
+}
+
+.anibest-card-wrapper:hover .anibest-card-border {
+    opacity: 1;
+    background: #f97316;
+    filter: blur(12px);
+}
+
+.anibest-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;
+}
+
+/* --- MODAL --- */
+#detailsModal { display: none; backdrop-filter: blur(25px); background: rgba(0,0,0,0.8); }
+#detailsModal.active { display: flex; }
+.anibest-modal-fixed-size { width: 1250px; height: 750px; max-width: 95vw; max-height: 90vh; position: relative; }
+.anibest-modal-accent { 
+    position: absolute; inset: -1.5px; z-index: -1; border-radius: 2rem; filter: blur(6px);
+    background: linear-gradient(90deg, #ea580c, #fb923c, #f97316, #ea580c); 
+    background-size: 300% 100%; animation: shine 5s linear infinite; 
+}
+.anibest-glass-panel { background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(5, 5, 5, 1) 100%); }
+
+.anibest-modal-scroll-area { overflow-y: auto; padding-right: 1rem; height: 100%; }
+.anibest-modal-scroll-area::-webkit-scrollbar { width: 3px; }
+.anibest-modal-scroll-area::-webkit-scrollbar-thumb { background: #f97316; border-radius: 10px; }
+
+@keyframes shine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* --- BUTTONS --- */
+.anibest-btn-primary, 
+.anibest-btn-secondary,  
+.anibest-btn-close,
+.anibest-btn-exit {
+    height: 68px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    border-radius: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.anibest-btn-primary {
+    flex: 50;
+    background: rgba(14, 165, 233, 0.15);
+    color: #0ea5e9;
+    border: 1px solid #0ea5e9;
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+}
+
+.anibest-btn-secondary {
+    flex: 25;
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+
+.anibest-btn-exit {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid #a855f7;
+    color: #a855f7;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+}
+
+.anibest-btn-close {
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid #f97316;
+    color: #f97316;
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 1rem;
+    right: 32px !important;
+}
+
+.anibest-btn-primary:hover, .anibest-btn-secondary:hover, 
+.anibest-btn-exit:hover, .anibest-btn-close:hover {
+    color: #fff;
+    filter: brightness(1.3);
+}
+
+
+/* Mobile S - Small screens up to 480px */
+@media (max-width: 480px) {
+    .anibest-layout-wrapper {
+        padding: 2rem 1rem;
+    }
+    .anibest-main-title {
+        font-size: 2.2rem;
+        line-height: 1;
+    }
+    .anibest-header-accent {
+        width: 180px;
+    }
+    /* Grid adjustment */
+    #bestContainer {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+    /* Modal Layout Shift */
+    .anibest-modal-fixed-size {
+        width: 95vw;
+        height: 75vh !important;
+    }
+    #modalContent {
+        flex-direction: column;
+    }
+    /* Poster Height Reduction */
+    #modalContent > div:first-child {
+        width: 100% !important;
+        height: 25vh !important; /* Made smaller as requested */
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-top-left-radius: 3rem !important;
+        border-top-right-radius: 3rem !important;
+    }
+    
+    #modalContent > div:last-child {
+        width: 100% !important;
+        height: 55vh !important;
+        padding: 1.5rem;
+    }
+    #modalContent h2 {
+        font-size: 2.2rem !important;
+    }
+    .anibest-btn-primary, .anibest-btn-secondary, .anibest-btn-exit {
+        height: 48px;
+        font-size: 10px;
+    }
+    .anibest-btn-close {
+        display: none; /* Rely on exit button for mobile */
+    }
+
+    .anibest-card {
+        aspect-ratio: 12/10; /* Changes from tall to a wider, shorter rectangle */
+    }
+}
+
+/* Mobile M - Medium screens 481px to 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+    .anibest-main-title {
+        font-size: 3rem;
+    }
+    .anibest-header-accent {
+        width: 300px;
+    }
+    #bestContainer {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .anibest-modal-fixed-size {
+        width: 90vw;
+        height: 75vh !important;
+    }
+    #modalContent {
+        flex-direction: column;
+    }
+    #modalContent > div:first-child {
+        width: 100% !important;
+        height: 30vh !important; /* Slightly taller but still reduced */
+        border-right: none;
+    }
+    #modalContent > div:last-child {
+        width: 100% !important;
+        padding: 2rem;
+    }
+}
+
+/* Mobile L - Large mobile/tablet screens 769px to 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    #bestContainer {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    .anibest-modal-fixed-size {
+        width: 95vw;
+        height: 700px;
+    }
+    #modalContent > div:first-child {
+        width: 40% !important;
+    }
+    #modalContent > div:last-child {
+        width: 60% !important;
+    }
+}

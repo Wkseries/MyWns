@@ -1,0 +1,315 @@
+.anitop-layout-wrapper {
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+    padding: 4rem 2rem;
+    overflow-x: hidden;
+}
+
+@keyframes anitop-float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-10px) rotate(0.5deg); } }
+@keyframes anitop-shine { from { background-position: -200% center; } to { background-position: 200% center; } }
+@keyframes anitop-slideUp { from { opacity: 0; transform: translateY(30px); filter: blur(10px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+@keyframes anitop-beams { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.anitop-bg-rays { position: fixed; top: -50%; left: -50%; width: 200vw; height: 200vh; background: conic-gradient(from 0deg at 50% 50%, transparent 0%, rgba(249, 115, 22, 0.05) 25%, transparent 50%, rgba(251, 146, 60, 0.05) 75%, transparent 100%); animation: anitop-beams 40s linear infinite; z-index: -1; }
+
+.anitop-section-header { text-align: center; margin-bottom: 5rem; width: 100%; position: relative; }
+.anitop-premium-header-container { position: relative; display: inline-block; padding: 0 1rem; }
+.anitop-premium-title { font-size: 1.85rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.8em; color: rgba(255, 255, 255, 0.4); display: flex; align-items: center; gap: 2rem; margin-left: 0.8em; }
+.anitop-premium-title::before, .anitop-premium-title::after { content: ""; height: 1px; width: 160px; background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.4), transparent); }
+.anitop-shimmer-text { background: linear-gradient(90deg, #444 0%, #fff 50%, #444 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: anitop-shine 4s linear infinite; }
+
+.anitop-main-grid { width: 100%; max-width: 85rem; display: grid; gap: 2rem; }
+@media (min-width: 1024px) { .anitop-main-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); } }
+
+.anitop-glass-panel { background: linear-gradient(135deg, rgba(15, 15, 15, 0.9) 0%, rgba(5, 5, 5, 1) 100%); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.08); height: 100%; position: relative; }
+.anitop-reveal { opacity: 0; animation: anitop-slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+.anitop-gold-border { position: absolute; inset: -2px; background: linear-gradient(90deg, #ca8a04, #facc15, #eab308, #ca8a04); background-size: 300% 100%; animation: anitop-shine 3s linear infinite; border-radius: 2.5rem; z-index: -1; filter: blur(8px); }
+.anitop-silver-border { position: absolute; inset: -1px; background: linear-gradient(90deg, #475569, #e2e8f0, #94a3b8, #475569); background-size: 300% 100%; animation: anitop-shine 4s linear infinite; border-radius: 2rem; z-index: -1; filter: blur(4px); opacity: 0.5; }
+.anitop-bronze-border { position: absolute; inset: -1px; background: linear-gradient(90deg, #7c2d12, #d97706, #9a3412, #7c2d12); background-size: 300% 100%; animation: anitop-shine 5s linear infinite; border-radius: 2rem; z-index: -1; filter: blur(4px); opacity: 0.5; }
+
+.anitop-modal-accent { position: absolute; inset: -1px; background-size: 200% 100%; animation: anitop-shine 4s linear infinite; z-index: -1; border-radius: 3rem; filter: blur(6px); opacity: 0.5; }
+.anitop-poster-card { background-size: cover; background-position: center; transition: transform 0.5s ease; }
+.anitop-poster-main { animation: anitop-float 6s ease-in-out infinite; }
+
+.anitop-btn-action { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; overflow: hidden; }
+.anitop-btn-action:hover { transform: translateY(-3px) scale(1.02); filter: brightness(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+.anitop-modal-overlay { display: none; backdrop-filter: blur(25px); background: rgba(0,0,0,0.8); }
+.anitop-modal-overlay.active { display: flex; }
+.anitop-modal-fixed-size { width: 1250px; height: 750px; max-width: 95vw; max-height: 90vh; }
+
+.anitop-modal-scroll-area { overflow-y: auto; padding-right: 1.5rem; }
+.anitop-modal-scroll-area::-webkit-scrollbar { width: 6px; }
+.anitop-modal-scroll-area::-webkit-scrollbar-thumb { background: rgba(249, 115, 22, 0.4); border-radius: 10px; }
+
+.anitop-premium-header-left { width: 100%; max-width: 1400px; margin-bottom: 2.5rem; display: flex; flex-direction: column; align-items: flex-start; }
+.anitop-eyebrow-small { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6em; color: #f97316; font-weight: 800; margin-bottom: 0.3rem; }
+.anitop-main-title-left { font-size: 4.5rem; font-weight: 900; letter-spacing: -0.04em; line-height: 0.85; background: linear-gradient(to right, #fff 20%, #f97316 50%, #fff 80%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: anitop-shine 6s linear infinite; }
+.anitop-header-line-left { width: 650px; height: 2px; background: linear-gradient(90deg, #f97316 0%, #f97316 40%, transparent 100%); margin-top: 0.8rem; }
+
+/* Neon Scrollbar */
+.anitop-modal-scroll-area { overflow-y: auto; padding-right: 1rem; height: 100%; }
+.anitop-modal-scroll-area::-webkit-scrollbar { width: 3px; }
+.anitop-modal-scroll-area::-webkit-scrollbar-thumb { background: #f97316; border-radius: 10px; }
+
+/* --- BUTTONS (NEON PURPLE/RED/BLUE) --- */
+.anitop-btn-primary-action, .anitop-btn-secondary-action, .anitop-btn-exit, .anitop-btn-hub-close-top {
+    height: 68px; font-weight: 900; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.15em; border-radius: 1.25rem;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.anitop-btn-primary-action {
+    flex: 50; background: rgba(14, 165, 233, 0.15); color: #0ea5e9; border: 1px solid #0ea5e9;
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+}
+
+.anitop-btn-secondary-action {
+    flex: 25; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid #ef4444;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+
+.anitop-btn-exit {
+    background: rgba(168, 85, 247, 0.1); border: 1px solid #a855f7; color: #a855f7;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+}
+
+.anitop-btn-hub-close-top {
+    background: rgba(249, 115, 22, 0.1); border: 1px solid #f97316; color: #f97316;
+    width: 45px; height: 45px; border-radius: 1rem;
+}
+
+.anitop-btn-hub-close-top {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 1rem;
+    right: 32px !important; /* Positioned to the right */
+    top: 20px !important;
+}
+
+.anitop-btn-primary-action:hover, .anitop-btn-secondary-action:hover, .anitop-btn-exit:hover {
+    filter: brightness(1.3); color: #fff;
+}
+
+/* Mobile S - Small screens up to 480px */
+@media (max-width: 480px) {
+    .anitop-layout-wrapper {
+        padding: 2rem 1rem;
+    }
+    .anitop-main-title-left {
+        font-size: 2.5rem;
+        line-height: 0.9;
+    }
+    .anitop-header-line-left {
+        width: 200px;
+        height: 1px;
+    }
+    .anitop-main-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .anitop-glass-panel {
+        padding: 1rem;
+    }
+    /* Adjusted Modal Height */
+    .anitop-modal-fixed-size {
+        width: 95vw;
+        height: 75vh !important;
+    }
+    .anitop-premium-header-container {
+        padding: 0 0.5rem;
+    }
+    .anitop-premium-title {
+        font-size: 2rem;
+        letter-spacing: 0.2em;
+        margin-bottom: -30px;
+    }
+    .anitop-premium-title::before, .anitop-premium-title::after {
+        display: none;
+    }
+    /* Modal adjustments for small screens */
+    #anitop-modalContent {
+        flex-direction: column;
+    }
+    #anitop-modalContent > div:first-child {
+        width: 100% !important;
+        height: 30vh !important; /* Shorter image height */
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-top-left-radius: 3rem !important; /* Top rounding */
+        border-top-right-radius: 3rem !important; /* Top rounding */
+        overflow: hidden !important;
+    }
+    #anitop-modalContent > div:last-child {
+        width: 100% !important;
+        height: 45vh !important; /* Adjusted content height */
+        padding: 1rem;
+    }
+    #anitop-modalContent > div:last-child h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    #anitop-modalContent > div:last-child p:first-of-type {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
+    #anitop-modalContent > div:last-child .space-y-4 p {
+        font-size: 1rem;
+    }
+    #anitop-modalContent .space-y-6 > div:last-child {
+        margin-bottom: 2rem;
+    }
+    #anitop-modalContent > div:last-child > div:last-child {
+        padding-top: 1rem;
+        margin-top: 0;
+        margin-bottom: 1.2rem;
+    }
+    .anitop-btn-primary-action, .anitop-btn-secondary-action, .anitop-btn-exit {
+        height: 43px;
+        font-size: 11px;
+    }
+    .anitop-btn-hub-close-top {
+        display: none;
+    }
+
+    /* Gold section specific adjustments */
+    .anitop-main-grid > div:first-child {
+        margin-bottom: 0.9rem;
+    }
+    .anitop-main-grid > div:first-child .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .anitop-main-grid > div:first-child h1 {
+        font-size: 2.5rem;
+        line-height: 1.1;
+    }
+    .anitop-main-grid > div:first-child .anitop-poster-main {
+        width: 200px;
+        height: 300px;
+        margin-top: 1.1rem;
+        margin-bottom: -35px;
+        border-top-left-radius: 4rem !important; /* Top rounding */
+        border-top-right-radius: 4rem !important; /* Top rounding */
+        overflow: hidden !important;
+    }
+    .anitop-main-grid > div:first-child .flex.flex-wrap.gap-3 {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .anitop-main-grid > div:first-child .anitop-btn-action {
+        width: 100%;
+        padding: 1rem;
+        font-size: 0.75rem;
+    }
+    /* General poster rounding */
+    .anitop-poster-card {
+        border-top-left-radius: 2.5rem !important;
+        border-top-right-radius: 2.5rem !important;
+        overflow: hidden !important;
+    }
+}
+
+/* Mobile M - Medium screens 481px to 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+    .anitop-layout-wrapper {
+        padding: 3rem 1.5rem;
+    }
+    .anitop-main-title-left {
+        font-size: 3.5rem;
+        line-height: 0.85;
+    }
+    .anitop-header-line-left {
+        width: 400px;
+    }
+    .anitop-main-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .anitop-glass-panel {
+        padding: 1.5rem;
+    }
+    /* Adjusted Modal Height */
+    .anitop-modal-fixed-size {
+        width: 90vw;
+        height: 80vh !important;
+    }
+    .anitop-premium-title {
+        font-size: 1.3rem;
+        letter-spacing: 0.3em;
+    }
+    .anitop-premium-title::before, .anitop-premium-title::after {
+        width: 60px;
+    }
+    /* Modal adjustments for medium screens */
+    #anitop-modalContent {
+        flex-direction: column;
+    }
+    #anitop-modalContent > div:first-child {
+        width: 100% !important;
+        height: 35vh !important;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-top-left-radius: 3rem !important;
+        border-top-right-radius: 3rem !important;
+        overflow: hidden !important;
+    }
+    #anitop-modalContent > div:last-child {
+        width: 100% !important;
+        height: 45vh !important;
+        padding: 1.5rem;
+    }
+    #anitop-modalContent .space-y-6 > div:last-child {
+        margin-bottom: 2rem;
+    }
+    #anitop-modalContent > div:last-child > div:last-child {
+        padding-top: 1rem;
+        margin-top: 0;
+        margin-bottom: 1.2rem;
+    }
+    .anitop-btn-primary-action, .anitop-btn-secondary-action, .anitop-btn-exit {
+        height: 43px;
+        font-size: 11px;
+    }
+    .anitop-btn-hub-close-top {
+        display: none;
+    }
+    .anitop-poster-card {
+        border-top-left-radius: 3rem !important;
+        border-top-right-radius: 3rem !important;
+        overflow: hidden !important;
+    }
+}
+
+/* Mobile L - Large mobile/tablet screens 769px to 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .anitop-layout-wrapper {
+        padding: 3.5rem 2rem;
+    }
+    .anitop-main-title-left {
+        font-size: 4rem;
+        line-height: 0.85;
+    }
+    .anitop-header-line-left {
+        width: 550px;
+    }
+    .anitop-main-grid {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 2rem;
+    }
+    .anitop-modal-fixed-size {
+        width: 1000px;
+        height: 700px;
+    }
+    .anitop-premium-title {
+        font-size: 1.6rem;
+        letter-spacing: 0.5em;
+    }
+    .anitop-premium-title::before, .anitop-premium-title::after {
+        width: 100px;
+    }
+}

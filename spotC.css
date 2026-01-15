@@ -1,0 +1,175 @@
+.anispot-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%; 
+  padding: 2rem 1%; 
+  box-sizing: border-box; 
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+/* --- BUTTON GRID LAYOUT --- */
+.anispot-buttons {
+  display: grid;
+  /* MANUAL SIZE: Change '1fr' to fixed 'px' to resize buttons */
+  grid-template-columns: repeat(4, 294px);
+  /* MANUAL GAP: Adjust spacing between buttons */
+  gap: 2.51rem; 
+  width: 100%;
+  box-sizing: border-box;
+  /* MANUAL MOVEMENT: Adjust -20px to move left/right */
+  margin-left: 12px; 
+}
+
+/* --- WRAPPER: Matches .hub-card-wrapper --- */
+.anispot-link {
+  position: relative;
+  padding: 3px;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1;
+}
+
+/* --- BORDER LAYER: Matches .hub-card-border --- */
+.anispot-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    padding: 2px;
+    background: rgba(255,255,255,0.05);
+    transition: all 0.4s ease;
+    z-index: 0;
+}
+
+/* --- HOVER EFFECTS: Matches buttonC.css exactly --- */
+.anispot-link:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.anispot-link:hover::before {
+    background: linear-gradient(135deg, #f97316, #ea580c, #fb923c, #f97316);
+    background-size: 300% 300%;
+    animation: hub-shine-spot 3s linear infinite;
+    /* Thick neon glow around the border */
+    box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+}
+
+/* --- INNER ICON: Matches .hub-card --- */
+.anispot-icon {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #0a0a0a;
+  border-radius: 1.4rem;
+  display: block;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.3s ease;
+}
+
+/* --- MEDIA SECTION (Video & Spotify) --- */
+.anispot-media {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 1.5rem;
+  /* CHANGED: Width set to 98% and centered */
+  width: 98%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.anispot-video { 
+    /* MANUAL WIDTH: Adjust 2.3 to change video width relative to spotify */
+    flex: 2.3; 
+}
+
+.anispot-spotify { 
+    /* MANUAL WIDTH: Adjust 1.2 to change spotify width relative to video */
+    flex: 1.2; 
+}
+
+.anispot-frame {
+  box-sizing: border-box;
+  width: 100%;
+  /* MANUAL HEIGHT: Adjust 476px for both players */
+  height: 476px;
+  border-radius: 1.2rem;
+  border: 2px solid #222;
+  background-color: #111;
+  display: block;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes hub-shine-spot { 
+    to { background-position: 200% center; }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.anispot-anim {
+  opacity: 0;
+  animation: fadeInLeft 0.6s ease-out forwards;
+  animation-delay: calc(var(--delay) * 0.15s);
+}
+
+/* --- MOBILE S, M, L OPTIMIZATIONS --- */
+
+
+/* Mobile Large (Standard Smartphones) */
+@media (max-width: 768px) {
+  .anispot-media { flex-direction: column; }
+
+  .anispot-buttons {
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1rem;
+
+    width: 98vw; 
+    max-width: 94%;
+    
+    margin: 0 auto; 
+    box-sizing: border-box;
+  }
+
+.anispot-video .anispot-frame {
+    width: 96%;
+    height: 204px; 
+    display: block;    /* Ensures the element respects margin centering */
+    margin: 0 auto;    /* 0 for top/bottom, auto for left/right */
+  }
+
+  .anispot-spotify .anispot-frame {
+    width: 96%;
+    height: 520px;
+    display: block;    /* Ensures the element respects margin centering */
+    margin: 0 auto;    /* 0 for top/bottom, auto for left/right */
+  }
+}
+
+/* Samsung Galaxy Tab S9+ Landscape (1317px x 683px) */
+@media screen and (width: 1317px) and (height: 683px) and (-webkit-min-device-pixel-ratio: 2.13) {
+
+
+  .anispot-buttons {
+    /* FIX: Use 1fr instead of 294px to ensure they scale to fit the 1317px width */
+    grid-template-columns: repeat(4, 1fr); 
+    
+    /* Reset the manual movement that pushes things off-screen */
+    margin-left: 0; 
+    width: 98%;
+    margin: 0 auto;
+    gap: 1.5rem; 
+  }
+
+}

@@ -1,0 +1,1470 @@
+/* --- PREVENT BACKGROUND SCROLL --- */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* --- LAYOUT & HEADER --- */
+.anibutton-wrap { 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1% 1rem 1%;
+    width: 98%;
+    margin: 0 auto;
+}
+.anibutton-header {
+    margin-bottom: 2.5rem;
+    margin-top: -30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.anibutton-eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6em;
+    color: #f97316;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+}
+.anibutton-title {
+    font-size: 4.2rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.85;
+    background: linear-gradient(to right, #fff 20%, #f97316 50%, #fff 80%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: anibutton-shine 6s linear infinite;
+}
+.anibutton-accent {
+    width: 400px; height: 3px;
+    background: linear-gradient(90deg, #f97316 0%, #f97316 40%, transparent 100%);
+    margin-top: 1rem;
+}
+@keyframes anibutton-shine { to { background-position: 200% center; } }
+
+/* --- MAIN BUTTONS --- */
+.anibutton-card-wrap {
+    position: relative;
+    padding: 3px;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.anibutton-card-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    padding: 2px;
+    background: rgba(255,255,255,0.05);
+    transition: all 0.4s ease;
+    z-index: 0;
+}
+.anibutton-card-wrap:hover .anibutton-card-border {
+    background: linear-gradient(135deg, #f97316, #ea580c, #fb923c, #f97316);
+    background-size: 300% 300%;
+    animation: anibutton-shine 3s linear infinite;
+    box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+}
+.anibutton-card {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 1 / 1;
+    background: #0a0a0a;
+    border-radius: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.3s ease;
+}
+.anibutton-card-label {
+    font-size: 0.85rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+.anibutton-card-wrap:hover .anibutton-card-label { color: #fff; }
+
+.anibutton-icon {
+    transition: all 0.3s ease;
+}
+.anibutton-card-wrap:hover .anibutton-icon { 
+    fill: #f97316; 
+    transform: scale(1.1);
+}
+
+/* --- MODAL UI --- */
+#anibutton-modal-overlay { display: none; backdrop-filter: blur(25px); background: rgba(0,0,0,0.8); }
+#anibutton-modal-overlay.anibutton-active { display: flex; }
+.anibutton-modal-container { width: 1250px; height: 750px; max-width: 95vw; max-height: 90vh; position: relative; }
+.anibutton-modal-accent { position: absolute; inset: -1.5px; z-index: -1; border-radius: 3rem; filter: blur(6px); background: linear-gradient(90deg, #ea580c, #fb923c, #f97316, #ea580c); background-size: 300% 100%; animation: anibutton-shine 5s linear infinite; }
+.anibutton-glass-panel { background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(5, 5, 5, 1) 100%); width: 100%; height: 100%; position: relative; }
+.anibutton-dice-scene { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(249, 115, 22, 0.08) 0%, transparent 70%); }
+.anibutton-loader-ring { width: 220px; height: 220px; border-radius: 50%; border: 4px solid transparent; border-top-color: #f97316; border-bottom-color: #f97316; animation: anibutton-spin-ring 2s linear infinite; position: relative; filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.3)); }
+.anibutton-loader-ring::before { content: ''; position: absolute; inset: 20px; border-radius: 50%; border: 3px solid transparent; border-left-color: #fff; border-right-color: #fff; animation: anibutton-spin-ring 1.2s linear reverse infinite; }
+.anibutton-loader-ring::after { content: '🎲'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 5rem; animation: anibutton-pulse-dice 0.6s ease-in-out infinite alternate; }
+
+@keyframes anibutton-spin-ring { to { transform: rotate(360deg); } }
+@keyframes anibutton-pulse-dice { from { transform: scale(0.9); filter: drop-shadow(0 0 10px #f97316); } to { transform: scale(1.1); filter: drop-shadow(0 0 30px #f97316); } }
+
+/* --- TRENDING VIEW UPDATED --- */
+.anibutton-trending-scene { 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    padding: 40px; 
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.anibutton-trending-scene::-webkit-scrollbar { display: none; }
+
+.anibutton-trending-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: white;
+    margin-bottom: 2rem;
+    border-left: 6px solid #f97316;
+    padding-left: 20px;
+    line-height: 1;
+}
+
+.anibutton-trending-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    /* INCREASE THIS VALUE TO MAKE POSTERS TALLER */
+    grid-auto-rows: 400px; 
+    gap: 15px; 
+}
+
+.anibutton-trending-card { 
+    position: relative; 
+    border-radius: 1.5rem; 
+    overflow: hidden; 
+    cursor: pointer; 
+    border: 1px solid rgba(255,255,255,0.05); 
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    height: 100%;
+}
+.anibutton-trending-card:hover { transform: scale(1.05); z-index: 10; border-color: #f97316; }
+.anibutton-trending-card:hover img { filter: brightness(0.3) blur(2px); }
+
+.anibutton-trending-card img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* Important: prevents stretching */
+    transition: all 0.6s ease;
+}
+
+/* Hover Effects */
+.anibutton-trending-card:hover img { 
+    transform: scale(1.1); 
+    filter: brightness(0.3) blur(2px);
+}
+
+.anibutton-trending-hook {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.anibutton-trending-card:hover .anibutton-trending-hook { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+.anibutton-trending-text { 
+    color: #f97316; 
+    font-weight: 900; 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    letter-spacing: 0.2em; 
+    margin-bottom: 0.5rem; 
+}
+
+.anibutton-trending-desc { 
+    color: white; 
+    font-size: 0.85rem; 
+    font-weight: 500; 
+    line-height: 1.3; 
+    font-style: italic; 
+}
+
+/* --- RANKINGS SCROLLBAR & VIEW --- */
+.anibutton-rankings-view { 
+    width: 100%; 
+    height: 100%; 
+    padding: 40px; 
+    overflow-y: auto; 
+    /* Hides scrollbar for Firefox */
+    scrollbar-width: none; 
+    /* Hides scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; 
+}
+
+/* Hides scrollbar for Chrome, Safari and Opera */
+.anibutton-rankings-view::-webkit-scrollbar { 
+    display: none;
+    width: 0 !important;
+}
+
+.anibutton-rank-section { 
+    margin-bottom: 50px; 
+}
+.anibutton-rank-header { 
+    font-size: 1.8rem; 
+    font-weight: 900; 
+    text-transform: uppercase; 
+    color: #f97316; 
+    border-left: 5px solid #f97316; 
+    padding-left: 20px; 
+    margin-bottom: 25px; 
+    letter-spacing: 0.1em; 
+}
+.anibutton-rank-row { 
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 15px; 
+}
+.anibutton-rank-card { 
+    position: relative;
+    aspect-ratio: 2/3; 
+    border-radius: 1rem; 
+    overflow: hidden; 
+    border: 1px solid rgba(255,255,255,0.1); 
+    cursor: pointer; 
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.anibutton-rank-card:hover { transform: scale(1.05); z-index: 10; border-color: #f97316; }
+.anibutton-rank-card img { width: 100%; height: 100%; object-fit: cover; transition: filter 0.4s ease; }
+.anibutton-rank-card:hover img { filter: brightness(0.3) blur(2px); }
+
+.anibutton-rank-hook {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+    pointer-events: none;
+}
+.anibutton-rank-card:hover .anibutton-rank-hook { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+.anibutton-rank-hook-text { 
+    color: #f97316; 
+    font-weight: 900; 
+    font-size: 0.7rem; 
+    text-transform: uppercase; 
+    letter-spacing: 0.15em; 
+    margin-bottom: 0.25rem; 
+}
+.anibutton-rank-hook-desc { 
+    color: white; 
+    font-size: 0.85rem; 
+    font-weight: 500; 
+    line-height: 1.3; 
+    font-style: italic; 
+}
+
+.anibutton-modal-scroll { overflow-y: auto; padding-right: 1rem; height: 100%; }
+.anibutton-modal-scroll::-webkit-scrollbar { width: 3px; }
+.anibutton-modal-scroll::-webkit-scrollbar-thumb { background: #f97316; border-radius: 10px; }
+
+/* --- SEARCH VIEW CONTAINER --- */
+.anibutton-search-view {
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* No scroll allowed */
+}
+
+#anibutton-search-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 0.8rem 1.5rem;
+    color: white;
+    font-size: 1.2rem;
+    outline: none;
+    margin-bottom: 1.5rem;
+}
+
+/* --- 2x2 GRID --- */
+#anibutton-search-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 12px;
+    flex-grow: 1;
+    overflow: hidden; /* Keep results inside the div */
+}
+
+/* --- HUNGRY MONSTER STAGE (Fits within Grid) --- */
+.anibutton-monster-stage {
+    grid-column: span 2;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 2rem;
+    border: 2px dashed rgba(249, 115, 22, 0.1);
+}
+
+.anibutton-monster-body {
+    font-size: 7rem;
+    line-height: 1;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+}
+
+.anibutton-monster-hungry { animation: anibutton-monster-gulp 1s infinite ease-in-out; }
+.anibutton-monster-angry { animation: anibutton-monster-rage 0.3s infinite; }
+
+@keyframes anibutton-monster-gulp {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15, 0.85); }
+}
+
+@keyframes anibutton-monster-rage {
+    0% { transform: translate(2px, 2px) rotate(0deg); }
+    25% { transform: translate(-2px, -2px) rotate(-8deg); }
+    50% { transform: translate(2px, -2px) rotate(8deg); }
+    100% { transform: translate(2px, 2px) rotate(0deg); }
+}
+
+.anibutton-monster-main { font-size: 1.8rem; font-weight: 900; color: white; text-transform: uppercase; }
+.anibutton-monster-sub { color: #f97316; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+
+/* --- SUGGESTION CARDS --- */
+.anibutton-suggestion-card {
+    display: flex;
+    gap: 15px;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    height: 100%;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.anibutton-suggestion-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: #f97316;
+}
+
+.anibutton-suggestion-poster {
+    width: 110px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.8rem;
+    flex-shrink: 0;
+}
+
+.anibutton-suggestion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.anibutton-suggestion-name {
+    color: white;
+    font-weight: 800;
+    font-size: 1.4rem;
+    line-height: 1.1;
+    margin-bottom: 5px;
+    white-space: normal;
+}
+
+.anibutton-suggestion-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.anibutton-suggestion-rating {
+    color: #f97316;
+    font-weight: 900;
+    font-size: 1.4rem;
+}
+
+.anibutton-suggestion-episodes {
+    color: #a1a1aa;
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+}
+
+.anibutton-suggestion-hook {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    font-style: italic;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+/* --- VERSUS LAYOUT --- */
+.anibutton-versus-arena { width: 100%; height: 100%; display: flex; flex-direction: column; padding: 40px; }
+.anibutton-versus-header { margin-bottom: 20px; text-align: center; }
+
+.anibutton-versus-title {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.5em;
+    color: white;
+    margin-top: -35px;
+    opacity: 0.8;
+}
+
+.anibutton-versus-progress-bg { 
+    width: 250px; height: 4px; background: rgba(255,255,255,0.1); 
+    border-radius: 2px; margin: 15px auto 0; overflow: hidden;
+}
+.anibutton-versus-progress-fill { height: 100%; background: #f97316; transition: width 0.4s ease; box-shadow: 0 0 10px #f97316; }
+
+.anibutton-versus-round {
+    font-size: 0.9rem;
+    color: #a1a1aa;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.anibutton-versus-field { flex: 1; display: flex; align-items: center; gap: 30px; justify-content: center; width: 100%; }
+
+.anibutton-versus-vs {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #f97316;
+    text-shadow: 0 0 20px rgba(249,115,22,0.5);
+    z-index: 10;
+    position: relative;
+}
+
+.anibutton-versus-option { 
+    flex: 1; 
+    height: 410px; 
+    max-width: 600px; 
+    position: relative; 
+    cursor: pointer;
+    border-radius: 2rem; 
+    overflow: hidden; 
+    border: 2px solid rgba(255,255,255,0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.anibutton-versus-option:hover { transform: scale(1.02); border-color: #f97316; box-shadow: 0 0 40px rgba(249,115,22,0.3); }
+.anibutton-versus-option img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s ease; }
+.anibutton-versus-option:hover img { filter: brightness(0.4) blur(3px); }
+
+.anibutton-versus-info { 
+    position: absolute; 
+    inset: 0; 
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 50%); 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end; 
+    padding: 2rem; 
+}
+
+.anibutton-versus-text {
+    width: 100%;
+}
+
+.anibutton-versus-info h3 { 
+    font-size: 1.4rem; font-weight: 900; color: white; 
+    transform: translateY(15px); transition: 0.3s ease; text-align: left;
+    margin: 0;
+}
+
+.anibutton-versus-hook {
+    font-size: 0.85rem; color: #a1a1aa; opacity: 0;
+    transform: translateY(20px); transition: 0.3s ease;
+    margin-bottom: 5px; text-align: left;
+}
+
+.anibutton-versus-option:hover h3 { transform: translateY(0); }
+.anibutton-versus-option:hover .anibutton-versus-hook { opacity: 1; transform: translateY(0); }
+
+.anibutton-versus-mid { font-size: 5rem; font-weight: 900; font-style: italic; color: #f97316; text-shadow: 0 0 20px rgba(249,115,22,0.5); z-index: 10; }
+
+/* --- UNIVERSAL NEON GLASS BASE --- */
+.anibutton-btn-primary, 
+.anibutton-btn-secondary, 
+.anibutton-btn-action, 
+.anibutton-btn-close,
+.anibutton-btn-exit {
+    height: 68px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    border-radius: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+/* 1. Watch Now - Cyan Neon (Stays Same) */
+.anibutton-btn-primary {
+    flex: 50;
+    background: rgba(14, 165, 233, 0.15);
+    color: #0ea5e9;
+    border: 1px solid #0ea5e9;
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+    animation: blue-pulse 2s infinite;
+}
+
+/* 2. Laugh Button - Now Red Neon */
+.anibutton-btn-secondary {
+    flex: 25;
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+    animation: red-pulse 2s infinite;
+}
+
+/* 3. Return/Back - Purple Neon (Stays Same) */
+.anibutton-btn-action {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid #a855f7;
+    color: #a855f7;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+    animation: purple-pulse 2s infinite;
+}
+
+/* 4. Exit & Top Close - Now Orange Neon */
+.anibutton-btn-exit, .anibutton-btn-close {
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid #f97316;
+    color: #f97316;
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
+    animation: orange-pulse 2s infinite;
+}
+
+/* Top Close Position Adjustment */
+.anibutton-btn-close {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 1rem;
+    right: 32px !important; /* Positioned to the right */
+    top: 20px !important;
+}
+
+.anibutton-btn-primary:hover, .anibutton-btn-secondary:hover, 
+.anibutton-btn-action:hover, .anibutton-btn-exit:hover, .anibutton-btn-close:hover {
+    color: #fff;
+    filter: brightness(1.3);
+}
+
+/* --- SHARED INTERNAL SHIMMER --- */
+.anibutton-btn-primary::after, .anibutton-btn-secondary::after, 
+.anibutton-btn-action::after, .anibutton-btn-exit::after, .anibutton-btn-close::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    transform: skewX(-20deg);
+    transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.anibutton-btn-primary::after { background: linear-gradient(to right, transparent, rgba(14, 165, 233, 0.4), transparent); }
+.anibutton-btn-secondary::after { background: linear-gradient(to right, transparent, rgba(239, 68, 68, 0.4), transparent); }
+.anibutton-btn-action::after { background: linear-gradient(to right, transparent, rgba(168, 85, 247, 0.4), transparent); }
+.anibutton-btn-exit::after, .anibutton-btn-close::after { background: linear-gradient(to right, transparent, rgba(249, 115, 22, 0.4), transparent); }
+
+.anibutton-btn-primary:hover::after, .anibutton-btn-secondary:hover::after, 
+.anibutton-btn-action:hover::after, .anibutton-btn-exit:hover::after, .anibutton-btn-close:hover::after {
+    left: 150%;
+}
+
+/* --- WRITE VIEW (SEARCH DESIGN PARITY) --- */
+.anibutton-write-view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2.5rem;
+    height: 100%;
+}
+
+/* Bigger & Bolder Suggestions */
+.anibutton-write-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.anibutton-write-tag {
+    padding: 0.8rem 1.4rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #a1a1aa;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+}
+
+.anibutton-write-tag:hover {
+    background: #f97316;
+    color: white;
+    border-color: #f97316;
+    transform: translateY(-2px);
+}
+
+.anibutton-write-refresh {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: #f97316;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.anibutton-write-refresh:hover {
+    transform: rotate(180deg);
+    background: rgba(249, 115, 22, 0.1);
+    border-color: #f97316;
+}
+
+/* The "Thinking" State - Matches Search Monster Style */
+.anibutton-write-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px; /* Increased Height */
+    width: 100%;
+}
+
+.anibutton-write-emoji {
+    font-size: 6rem;
+    margin-bottom: 1.5rem;
+    animation: anibutton-floating 3s ease-in-out infinite;
+}
+
+/* Custom Scanning Loader (No Dice) */
+.anibutton-scan-line {
+    width: 120px;
+    height: 4px;
+    background: #f97316;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #f97316;
+    animation: anibutton-scan-move 1.5s linear infinite;
+}
+
+@keyframes anibutton-scan-move {
+    0% { transform: translateY(-20px); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(20px); opacity: 0; }
+}
+
+/* --- INNOVATION VIEW (UNIQUE CLASSES) --- */
+.anibutton-innovation-view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2.5rem;
+    height: 100%;
+}
+
+/* Unique Suggestions Row */
+.anibutton-innovation-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.anibutton-innovation-tag {
+    padding: 0.8rem 1.4rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #a1a1aa;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.anibutton-innovation-tag:hover {
+    background: #f97316;
+    color: white;
+    border-color: #f97316;
+    transform: translateY(-2px);
+}
+
+/* Unique Refresh Button */
+.anibutton-innovation-refresh {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: #f97316;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.anibutton-innovation-refresh:hover {
+    transform: rotate(180deg);
+    background: rgba(249, 115, 22, 0.1);
+    border-color: #f97316;
+}
+
+/* Unique Placeholder Area */
+.anibutton-innovation-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    width: 100%;
+}
+
+.anibutton-innovation-ufo {
+    font-size: 6rem;
+    margin-bottom: 1.5rem;
+    animation: anibutton-floating 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.3));
+}
+
+/* Unique Scanning Loader */
+.anibutton-innovation-scanner {
+    width: 120px;
+    height: 4px;
+    background: #f97316;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #f97316;
+    animation: anibutton-scan-move 1.5s linear infinite;
+}
+
+@keyframes anibutton-scan-move {
+    0% { transform: translateY(-20px); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(20px); opacity: 0; }
+}
+
+@keyframes anibutton-floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* --- MATCH VIEW (POSITIVE RECOMMENDATION) --- */
+.anibutton-match-view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2.5rem;
+    height: 100%;
+}
+
+/* Unique Suggestions Row */
+.anibutton-match-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.anibutton-match-tag {
+    padding: 0.8rem 1.4rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #a1a1aa;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.anibutton-match-tag:hover {
+    background: #f97316;
+    color: white;
+    border-color: #f97316;
+    transform: translateY(-2px);
+}
+
+/* Unique Refresh Button */
+.anibutton-match-refresh {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: #f97316;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.anibutton-match-refresh:hover {
+    transform: rotate(180deg);
+    background: rgba(249, 115, 22, 0.1);
+    border-color: #f97316;
+}
+
+/* Unique Placeholder Area */
+.anibutton-match-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.anibutton-match-heart {
+    font-size: 6rem;
+    animation: anibutton-floating 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.3));
+}
+
+/* Unique Scanning Loader */
+.anibutton-match-scanner {
+    width: 120px;
+    height: 4px;
+    background: #f97316;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #f97316;
+    animation: anibutton-scan-move 1.5s linear infinite;
+}
+
+/* --- MOBILE OPTIMIZATION: LARGE BUTTONS + DEFINED GAP --- */
+@media (max-width: 768px) {
+
+    .anibutton-accent {
+        width: 110px;
+    }
+
+    .anibutton-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 2rem 1rem;
+        margin: 0 auto;
+    }
+
+    /* Increased gap between buttons for better visual separation */
+    #anibutton-button-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important; /* Increased from 10px to provide 'more' gap */
+        width: 100% !important;
+    }
+
+    /* Card adjustments to handle the new spacing */
+    .anibutton-card-wrap {
+        border-radius: 1.5rem; /* Matches desktop rounding for consistency */
+    }
+
+    .anibutton-card {
+        aspect-ratio: 1 / 1; /* Keeps buttons perfectly square */
+    }
+
+    /* Title scaling to match the premium spaced look */
+    .anibutton-title {
+        font-size: 2.2rem;
+        line-height: 1;
+    }
+
+    /* --- DICE VIEW MOBILE --- */
+    .anibutton-dice-scene {
+        padding: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .anibutton-dice-scene p {
+        text-align: center;
+        padding-top: 0.1rem;
+        font-size: 1.6rem;
+        letter-spacing: 0.1em;
+    }
+
+    /* --- TRENDING VIEW MOBILE --- */
+    .anibutton-trending-scene {
+        padding: 2rem;
+    }
+    .anibutton-trending-title {
+        font-weight: 700;
+        border-left: 3px solid #f97316;
+        font-size: 1.4rem;
+        margin-bottom: 1.3rem;
+        margin-top: 0.5rem;
+    }
+    .anibutton-trending-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px;
+        grid-auto-rows: 200px;
+    }
+
+    /* --- RANKINGS VIEW MOBILE --- */
+    .anibutton-rankings-view {
+        padding: 2rem;
+    }
+    .anibutton-rank-header {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+    }
+    .anibutton-rank-row {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px;
+    }
+
+    /* --- SEARCH VIEW MOBILE --- */
+    .anibutton-search-view {
+        padding: 20px;
+    }
+    .anibutton-search-view h2 {
+        margin-top: 0.5rem;
+    }
+    #anibutton-search-input {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+    #anibutton-search-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem;
+    }
+    .anibutton-suggestion-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+    .anibutton-suggestion-poster {
+        width: 120px !important;
+        height: 180px !important;
+        flex-shrink: 0;
+    }
+    .anibutton-suggestion-content {
+        flex: 1;
+    }
+    .anibutton-suggestion-name {
+        font-size: 0.95rem;
+        font-weight: 600;;
+        margin-bottom: 10px;
+        margin-left: 8px;
+    }
+    .anibutton-suggestion-meta {
+        font-size: 0.9rem;
+    }
+    .anibutton-suggestion-rating {
+        margin-left: 6px;
+        font-size: 0.9rem;
+    }
+    .anibutton-suggestion-episodes {
+        font-size: 0.9rem;
+    }
+    .anibutton-suggestion-hook {
+        font-size: 0.75rem;
+        margin-left: 8px;
+        margin-top: 2px;
+        display: block;
+        -webkit-line-clamp: unset;
+        overflow: visible;
+        white-space: normal;
+    }
+
+    /* --- WRITE VIEW MOBILE --- */
+    .anibutton-write-view {
+        padding: 0.5rem;
+    }
+    #anibutton-write-input {
+        font-size: 1rem;
+        padding: 1rem;
+        height: auto;
+    }
+    .anibutton-write-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        align-items: center;
+    }
+    .anibutton-write-tag {
+        flex: 0 0 auto;
+        max-width: calc(50% - 0.25rem);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .anibutton-write-refresh {
+        flex-shrink: 0;
+    }
+    #anibutton-write-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem;
+    }
+    .anibutton-suggestion-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+    .anibutton-suggestion-poster {
+        width: 60px;
+        height: 90px;
+        flex-shrink: 0;
+    }
+    .anibutton-suggestion-content {
+        flex: 1;
+    }
+    .anibutton-write-empty .anibutton-monster-main {
+        font-size: 1.2rem;
+    }
+    .anibutton-write-empty .anibutton-monster-sub {
+        font-size: 0.6rem;
+    }
+    .anibutton-write-empty .anibutton-write-emoji {
+        font-size: 4rem;
+    }
+
+    /* --- INNOVATION VIEW MOBILE --- */
+    .anibutton-innovation-view {
+        padding: 0.5rem;
+    }
+    #anibutton-innovation-input {
+        font-size: 1rem;
+        padding: 1rem;
+        height: auto;
+    }
+    .anibutton-innovation-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        align-items: center;
+    }
+    .anibutton-innovation-tag {
+        flex: 0 0 auto;
+        max-width: calc(50% - 0.25rem);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .anibutton-innovation-refresh {
+        flex-shrink: 0;
+    }
+    #anibutton-innovation-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem;
+    }
+    .anibutton-suggestion-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+    .anibutton-suggestion-poster {
+        width: 60px;
+        height: 90px;
+        flex-shrink: 0;
+    }
+    .anibutton-suggestion-content {
+        flex: 1;
+    }
+    .anibutton-innovation-empty{
+        padding-bottom: 60px;
+    }
+    .anibutton-innovation-empty .anibutton-monster-main {
+        font-size: 1.2rem;
+    }
+    .anibutton-innovation-empty .anibutton-monster-sub {
+        font-size: 0.6rem;
+    }
+    .anibutton-innovation-empty .anibutton-innovation-ufo {
+        font-size: 4rem;
+    }
+
+    /* --- MATCH VIEW MOBILE --- */
+    .anibutton-match-view {
+        padding: 0.5rem;
+    }
+    #anibutton-match-input {
+        font-size: 1rem;
+        padding: 1rem;
+        height: auto;
+    }
+    .anibutton-match-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        align-items: center;
+    }
+    .anibutton-match-tag {
+        flex: 0 0 auto;
+        max-width: calc(50% - 0.25rem);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .anibutton-match-refresh {
+        flex-shrink: 0;
+    }
+    #anibutton-match-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem;
+    }
+    .anibutton-suggestion-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+    .anibutton-suggestion-poster {
+        width: 60px;
+        height: 90px;
+        flex-shrink: 0;
+    }
+    .anibutton-suggestion-content {
+        flex: 1;
+    }
+    .anibutton-match-empty .anibutton-monster-main {
+        font-size: 1.2rem;
+    }
+    .anibutton-match-empty .anibutton-monster-sub {
+        font-size: 0.6rem;
+    }
+    .anibutton-match-empty .anibutton-match-heart {
+        font-size: 4rem;
+    }
+
+    /* --- VERSUS VIEW MOBILE --- */
+    .anibutton-versus-arena {
+        padding-top: 55px;
+    }
+    .anibutton-versus-title {
+        font-size: 1.2rem;
+    }
+    .anibutton-versus-field {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    .anibutton-versus-option {
+        width: 100%;
+        max-width: 250px;
+        max-height: 180px;
+    }
+    .anibutton-versus-info h3 {
+        font-size: 0.9rem;
+    }
+    .anibutton-versus-vs {
+        font-size: 1.5rem;
+        margin: 0.1rem 0;
+    }
+
+}
+
+/* Small (S) - Mobile Phones */
+@media (max-width: 640px) {
+    #anibutton-modal-overlay {
+        padding: 0.5rem;
+    }
+    .anibutton-modal-container {
+        width: 100%;
+        height: 100%;
+        max-width: 100vw;
+        max-height: 100vh;
+        border-radius: 1rem;
+    }
+    .anibutton-btn-close {
+        top: 1rem;
+        right: 1rem;
+        width: 2rem;
+        height: 2rem;
+    }
+    .anibutton-btn-close svg {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+/* Medium (M) - Tablets */
+@media (max-width: 768px) {
+    #anibutton-modal-overlay {
+        padding: 1rem;
+    }
+    .anibutton-modal-container {
+        width: 95%;
+        height: 90%;
+        max-width: 95vw;
+        max-height: 90vh;
+    }
+    .anibutton-btn-close {
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
+/* Large (L) - Small Desktops/Laptops */
+@media (max-width: 1024px) {
+    .anibutton-modal-container {
+        width: 1100px;
+        height: 550px;
+    }
+}
+
+/* --- MOBILE OVERRIDES: center write placeholder, simplify trending/rank hover, smaller tags --- */
+@media (max-width: 768px) {
+    /* 1) Center the "I need keywords to find..." placeholder vertically and horizontally */
+    .anibutton-write-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+        padding-bottom: 60px;
+    }
+
+    /* Make monster text slightly smaller on mobile so it fits nicely */
+    .anibutton-monster-main { font-size: 1.4rem; }
+    .anibutton-monster-sub { font-size: 0.75rem; letter-spacing: 1.6px; }
+
+    /* 2) Remove hover overlays & image transforms for trending and rankings on mobile
+       but keep border glow behavior (border-color) so cards still feel interactive. */
+    .anibutton-trending-card:hover, .anibutton-rank-card:hover {
+        transform: none !important;
+        z-index: auto !important;
+    }
+
+    .anibutton-trending-card:hover img,
+    .anibutton-rank-card:hover img,
+    .anibutton-trending-card img,
+    .anibutton-rank-card img {
+        transform: none !important;
+        filter: none !important;
+    }
+
+    /* Hide overlay hooks and extra text that appear on hover */
+    .anibutton-trending-hook,
+    .anibutton-rank-hook,
+    .anibutton-trending-card .anibutton-trending-hook,
+    .anibutton-rank-card .anibutton-rank-hook {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* 3) Make suggestion tags smaller for innovation & match (and slightly smaller for write) */
+    .anibutton-innovation-tag,
+    .anibutton-match-tag, .anibutton-write-tag {
+        font-size: 0.7rem;
+    }
+
+
+    /* Reduce spacing in keyword rows so tags fit better on small screens */
+    .anibutton-innovation-keywords-row1,
+    .anibutton-innovation-keywords-row2,
+    .anibutton-match-keywords-row1,
+    .anibutton-match-keywords-row2,
+    .anibutton-write-keywords-row1,
+    .anibutton-write-keywords-row2 {
+        gap: 8px;
+    }
+
+    /* Lower title in write innovate match */
+    .anibutton-write-view h2,
+    .anibutton-innovation-view h2,
+    .anibutton-match-view h2 {
+        padding-top: 2rem;
+        padding-left: 0.5rem;;
+    }
+
+    .anibutton-write-view p,
+    .anibutton-innovation-view p,
+    .anibutton-match-view p {
+        padding-left: 0.5rem;;
+    }
+
+    /* Center "filtering out comfort zone" and "searching perfect match" */
+    .anibutton-text {
+        text-align: center;
+        margin-bottom: 100px;
+    }
+
+    /* Show only 5 tags on mobile: 3 in row1, 2 in row2 */
+    .anibutton-match-keywords-row1 .anibutton-match-tag:nth-child(4),
+    .anibutton-innovation-keywords-row1 .anibutton-innovation-tag:nth-child(4),
+    .anibutton-write-keywords-row1 .anibutton-write-tag:nth-child(4),
+    .anibutton-match-keywords-row2 .anibutton-match-tag:nth-child(3),
+    .anibutton-innovation-keywords-row2 .anibutton-innovation-tag:nth-child(3),
+    .anibutton-write-keywords-row2 .anibutton-write-tag:nth-child(3) {
+        display: none;
+    }
+
+    /* Reduce long words or 2 worded words on mobile */
+    .anibutton-match-tag,
+    .anibutton-innovation-tag,
+    .anibutton-write-tag {
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Show row2 on mobile */
+    .anibutton-write-keywords-row2,
+    .anibutton-innovation-keywords-row2,
+    .anibutton-match-keywords-row2 {
+        display: flex;
+    }
+
+    /* Mobile: 1 column grid for results */
+    #anibutton-match-grid,
+    #anibutton-innovation-grid,
+    #anibutton-write-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .anibutton-match-empty,
+    .anibutton-innovation-empty,
+    .anibutton-write-empty {
+        grid-column: span 1;
+    }
+
+    .anibutton-monster-sub {
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .anibutton-modal-container {
+        width: 95vw !important;
+        height: 90vh !important;
+        margin: 0 auto;
+    }
+
+    /* Force the internal panel to stack vertically */
+    #anibutton-modal-content {
+        flex-direction: column !important;
+        overflow-y: auto !important;
+    }
+
+    /* Target the first div (Poster/Media) - Matching #modalContent > div:first-child from Best */
+    .anibutton-details-modal > div:first-child {
+        width: 100% !important;
+        height: 25vh !important; /* Matches the vertical proportion in bestC.css */
+        flex-shrink: 0;
+        border-right: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-top-left-radius: 3rem !important;
+        border-top-right-radius: 3rem !important;
+    }
+
+    /* Target the second div (Text Content) - Matching #modalContent > div:last-child from Best */
+    .anibutton-details-modal > div:last-child {
+        width: 100% !important;
+        height: auto !important;
+        padding: 1.5rem !important;
+        flex-grow: 1;
+    }
+
+    /* Adjust the main title size to fit mobile screens */
+    .anibutton-details-modal h2.text-5xl {
+        font-size: 2.2rem !important;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin-bottom: 1rem !important;
+    }
+
+    /* Adjust the metadata (Rating, Episodes, Studio) for mobile */
+    .anibutton-details-modal .flex.gap-8 {
+        gap: 1rem !important;
+        justify-content: flex-start;
+    }
+
+    /* Scale down the large rating/episode numbers */
+    .anibutton-details-modal .text-2xl {
+        font-size: 1.25rem !important;
+    }
+
+    /* Handle the bottom action buttons */
+    .anibutton-details-modal .pt-8 {
+        padding-top: 1.5rem !important;
+        gap: 8px !important;
+    }
+
+    /* Re-style buttons to be compact like the 'best' buttons */
+    .anibutton-btn-primary, 
+    .anibutton-btn-secondary, 
+    .anibutton-btn-action {
+        height: 48px !important;
+        font-size: 10px !important;
+        padding: 0 12px !important;
+    }
+
+    /* Specifically hide the top-right X button, just like in Best */
+    .anibutton-btn-close {
+        background-color: rgba(43, 42, 42, 0.89) !important;
+    }
+}

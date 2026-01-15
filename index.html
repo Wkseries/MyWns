@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <title>Review</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="AnimeList.js" defer></script>
+
+    <script src="topJ.js" defer></script>
+    <script src="bestJ.js" defer></script>
+    <script src="latestJ.js" defer></script>
+    <script src="tvj.js" defer></script>
+    <script src="buttonJ.js" defer></script>
+    <script src="AslidJ.js" defer></script>
+
+    <link rel="stylesheet" href="topC.css">
+    <link rel="stylesheet" href="bestC.css">
+    <link rel="stylesheet" href="latestC.css">
+    <link rel="stylesheet" href="tvc.css">
+    <link rel="stylesheet" href="buttonC.css">
+    <link rel="stylesheet" href="AslidC.css">
+    <link rel="stylesheet" href="spotC.css">
+
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /* Pure black base with a fixed, very subtle deep orange radial glow */
+    background: 
+        radial-gradient(circle at 50% -20%, rgba(234, 88, 12, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(249, 115, 22, 0.05) 0%, transparent 40%),
+        #000000;
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Optional: Very faint vignette to keep the focus on the center content */
+body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+    </style>
+
+</head>
+<body>
+
+<div>  
+
+    <div class="anitop-bg-rays"></div>
+
+    <div class="anitop-layout-wrapper">
+        <header class="anitop-section-header anitop-reveal">
+            <div class="anitop-premium-header-container">
+                <h2 class="anitop-premium-title">
+                    <span class="anitop-shimmer-text">Anime Featured</span>
+                </h2>
+            </div>
+        </header>
+
+        <div class="anitop-premium-header-left">
+            <span class="anitop-eyebrow-small">Top Rated Selection</span>
+            <h1 class="anitop-main-title-left">BEST OF THE BEST</h1>
+            <div class="anitop-header-line-left"></div>
+        </div>
+
+        <div id="anitop-animeContainer" class="anitop-main-grid"></div>
+    </div>
+
+    <div id="anitop-detailsModal" class="anitop-modal-overlay fixed inset-0 z-50 p-6 items-center justify-center" onclick="topCloseModal()">
+        <div class="anitop-modal-fixed-size relative" onclick="event.stopPropagation()">
+            <div class="anitop-modal-accent" id="anitop-modalAccent"></div>
+            
+            <div class="anitop-glass-panel rounded-[3rem] border border-white/10 overflow-hidden h-full flex" id="anitop-modalContent"></div>
+            
+            <button onclick="topCloseModal()" class="anitop-btn-hub-close-top absolute anitop-8 right-8 text-zinc-500 hover:text-white transition-colors z-[60] bg-black/40 backdrop-blur-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="anibest-layout-wrapper">
+        <header class="anibest-premium-header">
+            <div class="title-wrap">
+                <span class="anibest-eyebrow">Top Tier Selection</span>
+                <h1 class="anibest-main-title">BEST RATED</h1>
+                <div class="anibest-header-accent"></div>
+            </div>
+        </header>
+
+        <div id="bestContainer"></div>
+    </div>
+
+    <div id="detailsModal" class="fixed inset-0 z-50 p-6 items-center justify-center" onclick="closeModal()">
+        <div class="anibest-modal-fixed-size relative" onclick="event.stopPropagation()">
+            <div class="anibest-modal-accent" id="modalAccent"></div>
+            <div class="anibest-glass-panel rounded-[3rem] border border-white/10 overflow-hidden h-full flex" id="modalContent"></div>
+            
+            <button onclick="closeModal()" class="anibest-btn-close absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors z-[60] bg-black/40 backdrop-blur-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="anilast-layout-wrapper">
+        <header class="anilast-premium-header">
+            <span class="anilast-eyebrow">Fresh Picks</span>
+            <h1 class="anilast-main-title">LATEST ADDED</h1>
+            <div class="anilast-header-accent"></div>
+        </header>
+
+        <div id="anilast-latestContainer"></div>
+    </div>
+
+    <div id="anilast-detailsModal" class="fixed inset-0 z-50 p-6 items-center justify-center" onclick="anilastCloseModal()">
+        <div class="anilast-modal-fixed-size relative" onclick="event.stopPropagation()">
+            <div class="anilast-modal-accent" id="anilast-modalAccent"></div>
+            <div class="anilast-glass-panel rounded-[3rem] border border-white/10 overflow-hidden h-full flex" id="anilast-modalContent"></div>
+            
+            <button onclick="anilastCloseModal()" class="anilast-btn-hub-close-top absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors z-[60] bg-black/40 backdrop-blur-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="anibutton-wrap">
+        <header class="anibutton-header">
+            <span class="anibutton-eyebrow">Interactive Hub</span>
+            <h1 class="anibutton-title">EXPLORE</h1>
+            <div class="anibutton-accent"></div>
+        </header>
+
+        <div class="anitv-slider-wrap" id="anitv-trigger">
+        <div class="anitv-vignette"></div>
+        <img id="anitv-poster-view" src="" alt="Poster" draggable="false">
+        
+        <div class="anitv-badge">
+            <span class="anitv-dot"></span>
+            FEATURED LIVE ON TV
+        </div>
+    </div>
+
+        <div id="anibutton-button-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-10 w-full mx-auto">
+        </div>
+    </div>
+
+    <div id="anibutton-modal-overlay" class="fixed inset-0 z-50 p-6 items-center justify-center hidden" onclick="closeHubModal()">
+        <div class="anibutton-modal-container relative" onclick="event.stopPropagation()">
+            <div class="anibutton-modal-accent"></div>
+            <div id="anibutton-modal-content" class="anibutton-glass-panel rounded-[3rem] border border-white/10 overflow-hidden h-full flex">
+            </div>
+                <button onclick="closeHubModal()" class="anibutton-btn-close absolute top-8 right-8 text-zinc-500 z-[60] bg-black/40 backdrop-blur-md">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+        </div>
+    </div>
+
+    <div class="anislider-gallery-wrapper">
+        <button class="anislider-arrow-btn anislider-left-arrow" onclick="anisliderShiftGallery(-1)">&#10094;</button>
+        <div class="anislider-gallery-viewport">
+            <div class="anislider-gallery-track" id="anislider-galleryTrack"></div>
+        </div>
+        <button class="anislider-arrow-btn anislider-right-arrow" onclick="anisliderShiftGallery(1)">&#10095;</button>
+    </div>
+
+    <div id="anislider-detailsModal" class="fixed inset-0 z-50 p-6 items-center justify-center" onclick="anisliderCloseModal()">
+        <div class="anislider-modal-fixed-size relative" onclick="event.stopPropagation()">
+            <div class="anislider-modal-accent" id="anislider-modalAccent"></div>
+            <div class="anislider-glass-panel rounded-[3rem] border border-white/10 overflow-hidden h-full flex" id="anislider-modalContent"></div>
+            
+            <button onclick="anisliderCloseModal()" class="anislider-btn-hub-close-top absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors z-[60] bg-black/40 backdrop-blur-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="anispot-main">
+    <div class="anispot-buttons">
+        <a href="https://www.netflix.com" class="anispot-link anispot-anim" style="--delay: 1" target="_blank">
+            <img src="https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940" alt="Netflix" class="anispot-icon">
+        </a>
+        <a href="https://www.myasiantv.es/" class="anispot-link anispot-anim" style="--delay: 2" target="_blank">
+            <img src="https://i0.wp.com/theinscribermag.com/wp-content/uploads/2024/05/images-35.jpeg?fit=512%2C512&ssl=1" alt="MyAsianTv" class="anispot-icon">
+        </a>
+        <a href="https://www.viki.com" class="anispot-link anispot-anim" style="--delay: 3" target="_blank">
+            <img src="https://i.pinimg.com/736x/ee/69/74/ee6974422fb38a6deb9fcfeaa245b68b.jpg" alt="Viki" class="anispot-icon">
+        </a>
+        <a href="https://www.dramacool.bg/" class="anispot-link anispot-anim" style="--delay: 4" target="_blank">
+            <img src="https://image.winudf.com/v2/image1/Y29tLndEcmFtYWNvb2xfMTYyNDY4OTVfaWNvbl8xNjY4NzY2ODk1XzA1Nw/icon.png?w=312&fakeurl=1" alt="DramaCool" class="anispot-icon">
+        </a>               
+    </div>
+
+    <div class="anispot-media">
+        <div class="anispot-video anispot-anim" style="--delay: 5">
+            <video class="anispot-frame" controls>
+                <source src="anime.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="anispot-spotify anispot-anim" style="--delay: 6">
+            <iframe 
+                class="anispot-frame"
+                src="https://open.spotify.com/embed/playlist/4Igd4Wy6Ew4METYcZJSySM?utm_source=generator" 
+                frameborder="0" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+            </iframe>   
+        </div>
+    </div>
+    </div>
+
+</div>  
+
+</body>
+</html>

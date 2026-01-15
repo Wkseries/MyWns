@@ -1,0 +1,330 @@
+/* Ensure modal height matches latest exactly */
+.anislider-modal-fixed-size {
+    width: 95vw;
+    max-width: 1200px;
+    height: 85vh !important; /* Forces the specific height from latest */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 1. Hide Arrows when modal is open */
+body.anislider-modal-open .anislider-arrow-btn {
+    display: none !important;
+}
+
+/* 2. Hide Gallery/Background content and prevent scroll */
+body.anislider-modal-open .anislider-gallery-wrapper {
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* 3. Ensure the modal container itself is scrollable if content overflows */
+.anislider-modal-scroll-area {
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Custom Scrollbar for the modal (matching latest style) */
+.anislider-modal-scroll-area::-webkit-scrollbar {
+    width: 4px;
+}
+.anislider-modal-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(249, 115, 22, 0.3);
+    border-radius: 10px;
+}
+
+.anislider-gallery-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 10px ;
+  padding: 0 22px; 
+  box-sizing: border-box;
+  overflow: hidden; 
+}
+
+.anislider-gallery-viewport {
+  width: 100%;
+  /* 2. Changed to clip or visible so the scale doesn't get "eaten" */
+  overflow: clip; 
+  padding: 40px 0;
+  margin: -40px 0;
+}
+
+.anislider-gallery-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.anislider-poster-item {
+  flex: 0 0 calc(100% / 5);
+  box-sizing: border-box;
+  /* 3. Reduced padding to make posters wider and gaps smaller */
+  padding: 0 4px; 
+  position: relative;
+  z-index: 1;
+}
+
+.anislider-poster-link {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  background: #0a0a0a;
+}
+
+.anislider-poster-link img {
+  width: 100%;
+  height: 420px; 
+  object-fit: cover;
+  display: block;
+  transition: all 0.6s ease;
+}
+
+.anislider-poster-info-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.4s ease;
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.anislider-poster-title {
+  color: #f97316;
+  font-weight: 900;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.anislider-poster-hook {
+  color: white;
+  font-size: 0.90rem;
+  font-weight: 500;
+  line-height: 1.4;
+  font-family: 'Poppins', sans-serif;
+}
+
+.anislider-poster-item:hover { z-index: 10; }
+
+.anislider-poster-item:hover .anislider-poster-link { 
+    border-color: #f97316; 
+}
+
+.anislider-poster-item:hover img { filter: brightness(0.3) blur(2px); transform: scale(1.1); }
+.anislider-poster-item:hover .anislider-poster-info-overlay { opacity: 1; transform: translateY(0); }
+
+/* --- MODAL STYLES --- */
+#anislider-detailsModal { display: none; backdrop-filter: blur(25px); background: rgba(0,0,0,0.8); }
+#anislider-detailsModal.active { display: flex; }
+.anislider-modal-fixed-size { width: 1250px; height: 750px; max-width: 95vw; max-height: 90vh; position: relative; z-index: 60; }
+.anislider-modal-accent { 
+    position: absolute; inset: -1.5px; z-index: -1; border-radius: 2rem; filter: blur(6px);
+    background: linear-gradient(90deg, #ea580c, #fb923c, #f97316, #ea580c); 
+    background-size: 300% 100%; animation: anislider-shine 5s linear infinite; 
+}
+.anislider-glass-panel { background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(5, 5, 5, 1) 100%); }
+.anislider-modal-scroll-area { overflow-y: auto; padding-right: 1rem; height: 100%; }
+.anislider-modal-scroll-area::-webkit-scrollbar { width: 3px; }
+.anislider-modal-scroll-area::-webkit-scrollbar-thumb { background: #f97316; border-radius: 10px; }
+
+.anislider-btn-primary-action, .anislider-btn-secondary-action, .anislider-btn-exit {
+    height: 68px; font-weight: 900; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.15em; border-radius: 1.25rem;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.4s ease; backdrop-filter: blur(10px);
+}
+.anislider-btn-primary-action { flex: 50; background: rgba(14, 165, 233, 0.15); color: #0ea5e9; border: 1px solid #0ea5e9; }
+.anislider-btn-secondary-action { flex: 25; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid #ef4444; }
+.anislider-btn-exit { background: rgba(168, 85, 247, 0.1); border: 1px solid #a855f7; color: #a855f7; }
+
+.anislider-btn-hub-close-top {
+    position: absolute; background: rgba(249, 115, 22, 0.1); border: 1px solid #f97316; color: #f97316;
+    width: 40px; height: 40px; border-radius: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+
+@keyframes anislider-shine { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+.anislider-arrow-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.9); color: #f97316; border: 2px solid #f97316;
+  width: 50px; height: 50px; border-radius: 50%; cursor: pointer; z-index: 200;
+  display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
+}
+.anislider-arrow-btn:hover { background: #f97316; color: #000; box-shadow: 0 0 20px rgba(249, 115, 22, 0.4); }
+.anislider-left-arrow { left: 5px; }
+.anislider-right-arrow { right: 5px; }
+
+@media (max-width: 768px) {
+    :root {
+        --poster-h: 160px; 
+        --gap: 10px;
+        --comp-width: 92%;
+    }
+
+    /* 1. Wrapper: Reset desktop padding and positioning */
+    .anislider-gallery-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important; /* Critical: removes desktop 22px padding */
+        margin: 5px 0 !important;
+        height: auto !important;
+        gap: var(--gap) !important; 
+        overflow: visible !important;
+    }
+
+    /* 2. Viewport */
+    .anislider-gallery-viewport {
+        width: 100% !important; 
+        height: calc((var(--poster-h) * 3) + (var(--gap) * 2)) !important; 
+        transform: none !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        scroll-snap-type: y mandatory;
+        -webkit-overflow-scrolling: touch;
+        order: 2;
+    }
+
+    /* 3. Track */
+    .anislider-gallery-track {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: var(--gap) !important;
+        width: 100% !important;
+        align-items: center !important; 
+        transform: none !important;
+        transition: none !important;
+    }
+
+    /* 4. Poster Items: Strict 96% width */
+    .anislider-poster-item {
+        flex: 0 0 var(--poster-h) !important; 
+        width: var(--comp-width) !important; 
+        padding: 0 !important; 
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        scroll-snap-align: start;
+    }
+
+    .anislider-poster-link {
+        transform: none !important;
+        width: 100% !important; 
+        height: var(--poster-h) !important; 
+        margin: 0 !important;
+        border-radius: 1rem;
+    }
+
+    .anislider-poster-link img { height: 100% !important; }
+
+    /* 5. Arrows: Resetting all desktop absolute positions */
+    .anislider-arrow-btn {
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+        width: var(--comp-width) !important; 
+        height: 40px !important; 
+        border-radius: 12px !important;
+        background: rgba(249, 115, 22, 0.1) !important;
+        border: 1px solid #f97316 !important;
+        color: #f97316 !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .anislider-left-arrow { order: 1; }
+    .anislider-right-arrow { order: 3; }
+
+    /* Icons */
+    .anislider-left-arrow::before { content: '\25B2'; font-size: 1.2rem; }
+    .anislider-right-arrow::before { content: '\25BC'; font-size: 1.2rem; }
+    .anislider-left-arrow, .anislider-right-arrow { font-size: 0 !important; }
+}
+
+/* Mobile Media Queries for Aslid Modal (Matched to Latest) */
+/* --- ASLIDER MOBILE MEDIA QUERY (MATCHING LATEST) --- */
+@media (max-width: 480px) {
+    /* Hide background elements and arrows when modal is open */
+    body.anislider-modal-open .anislider-arrow-btn {
+        display: none !important;
+    }
+    body.anislider-modal-open .anislider-gallery-wrapper {
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    /* Modal Layout Shift matching latest exactly */
+    .anislider-modal-fixed-size {
+        width: 95vw;
+        height: 75vh !important;
+    }
+
+    #anislider-modalContent {
+        flex-direction: column;
+    }
+    
+    /* Poster inside Modal adjustment (Top Half) */
+    #anislider-modalContent > div:first-child {
+        width: 100% !important;
+        height: 25vh !important;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-top-left-radius: 3rem !important;
+        border-top-right-radius: 3rem !important;
+    }
+    
+    /* Content inside Modal adjustment (Bottom Half) */
+    #anislider-modalContent > div:last-child {
+        width: 100% !important;
+        height: 50vh !important; 
+        padding: 1.5rem !important;
+    }
+
+    /* Modal Title Font Size */
+    #anislider-modalContent h2 {
+        font-size: 2.2rem !important;
+    }
+
+    /* Button adjustments */
+    .anislider-btn-primary-action, 
+    .anislider-btn-secondary-action, 
+    .anislider-btn-exit {
+        height: 48px;
+        font-size: 10px;
+    }
+    
+    /* Hide the top-right close button on mobile */
+    .anislider-btn-hub-close-top {
+        display: none;
+    }
+
+    /* Gallery Base Adjustment for Mobile */
+    .anislider-gallery-wrapper {
+        padding: 2rem 1rem;
+    }
+}
